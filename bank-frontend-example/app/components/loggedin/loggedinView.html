@@ -1,0 +1,124 @@
+<br />
+<h4 class="ui horizontal header divider">
+    ATM Services
+</h4>
+<div ng-controller="LoggedInCtrl">
+    <div class="ui cards">
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="money icon"></i> Withdraw Cash</a>
+                <div class="meta">
+                    <span class="date">(widthdraw from balance)</span>
+                </div>
+                <div class="description">
+                    <div class="ui buttons">
+                        <div class="huge ui button" ui-sref="withdrawcash" style="width: 257px; height: 71px; line-height: 40px;">Widthdraw Cash</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="payment icon"></i> Pay bill</a>
+                <div class="meta">
+                    <span class="date">(in whole or part)</span>
+                </div>
+                <div class="description">
+                    <div class="ui buttons">
+                        <div class="large ui button" style="height: 70px; width: 126px; line-height: 45px;">Pay whole</div>
+                        <div class="or" style="margin-top: 20px;"></div>
+                        <div class="large ui positive button" style="height: 70px; width: 126px; line-height: 45px;">Pay part</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="unhide icon"></i> Quick-Check Balance</a>
+                <div class="meta">
+                    <span class="date">(quickly see your balance on-screen)</span>
+                </div>
+                <div class="description">
+                    <button ng-click="revealBalance()" ng-hide="revealButtonInvisible" class="huge ui button">Reveal Account Balance</button>
+                    <h3 class="header" ng-hide="!revealButtonInvisible">In account: NOK100000</h3>
+                    <button ng-click="hideBalance()" ng-hide="!revealButtonInvisible" class="small ui button">Hide Account Balance</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="payment icon"></i> Cancel Direct Debit Payment</a>
+                <div class="meta">
+                    <span class="date">(cancel payments)</span>
+                </div>
+                <div class="description">
+                    <button class="huge ui button">Browse Pending Payments</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="gift icon"></i> Buy VISA Gift Card</a>
+                <div class="meta">
+                    <span class="date">(gift cards)</span>
+                </div>
+                <div class="description">
+                    <button class="huge ui button" style="min-height: 71px; width: 257px">Buy VISA Gift Card</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="info icon"></i> Account Details</a>
+                <div class="meta">
+                    <span class="date">(name, number, etc.)</span>
+                </div>
+                <div class="description">
+                    <button class="huge ui button" style="min-height: 71px;">Change Account Details</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="money icon"></i> Transfer Cash</a>
+                <div class="meta">
+                    <span class="date">(to same or different bank)</span>
+                </div>
+                <div class="description">
+                    <button class="huge ui button" style="min-height: 71px; width: 257px;">Transfer Cash</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="life ring icon"></i> Replacement Credit Card</a>
+                <div class="meta">
+                    <span class="date">(lost your VISA?)</span>
+                </div>
+                <div class="description">
+                    <button class="huge ui button" style="min-height: 71px;">Request Replacement Credit Card</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 150px;">
+            <div class="content">
+                <a class="header"><i class="lock icon"></i> Log out</a>
+                <div class="meta">
+                    <span class="date">(quit ATM session)</span>
+                </div>
+                <div class="description">
+                    <button ui-sref="login" class="huge negative ui button" style="min-height: 71px; width: 257px;">Log Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
