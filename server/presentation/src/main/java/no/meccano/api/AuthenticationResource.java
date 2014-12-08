@@ -1,10 +1,12 @@
 package no.meccano.api;
 
-import no.meccano.data.AccountRepository;
-import no.meccano.data.SessionRepository;
-import no.meccano.domain.Account;
-import no.meccano.domain.AuthenticationAttempt;
-import no.meccano.domain.Session;
+import no.meccano.business.AccountService;
+import no.meccano.business.SessionService;
+import no.meccano.domain.account.Account;
+import no.meccano.domain.authentication.AuthenticationAttempt;
+import no.meccano.domain.authentication.Session;
+import no.meccano.domain.common.InvalidArgumentException;
+import no.meccano.domain.common.NullArgumentException;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -17,29 +19,36 @@ import javax.ws.rs.core.Response;
 public class AuthenticationResource
 {
     @Inject
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @Inject
-    private SessionRepository sessionRepository;
+    private SessionService sessionService;
 
     @POST
     @Consumes("application/json")
     @Produces("application/json")
     public Response authenticate(final AuthenticationAttempt attempt)
     {
-        final Account matchedAccount = accountRepository.findByAccountNumber(attempt.getAccountNumber());
-
-        if (matchedAccount == null) {
-            return Response.status(418).entity(new ErrorResponse("No such account")).build();
-        }
-
-        if (!attempt.getPin().equals(matchedAccount.getPin()))
+        try
         {
-            return Response.status(401).entity(new ErrorResponse("Wrong pin")).build();
+            final Account matchedAccount = accountService.findByAccountNumber(attempt.getAccountNumber());
+            final Session session = sessionService.createSession(attempt);
+
+            if (matchedAccount == null)
+            {
+                return Response.status(418).entity(new ErrorResponse("No such account")).build();
+            }
+
+            if (!attempt.getPin().equals(matchedAccount.getPin()))
+            {
+                return Response.status(401).entity(new ErrorResponse("Wrong pin")).build();
+            }
+
+            return Response.ok(matchedAccount).header("Authorization", session.getToken()).build();
         }
-
-        final Session session = sessionRepository.createSession(matchedAccount.getAccountNumber());
-
-        return Response.ok(matchedAccount).header("Authorization", session.getToken()).build();
+        catch (InvalidArgumentException | NullArgumentException e)
+        {
+            return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(e.getMessage())).build();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package no.meccano.data;
 
-import no.meccano.domain.Session;
+import no.meccano.domain.authentication.Session;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class MapSessionRepository implements SessionRepository
     final Map<String, Session> sessions = new HashMap<>();
 
     @Override
-    public Session getByAccountNumber(final String accountNumber)
+    public Session findByAccountNumber(final String accountNumber)
     {
         return sessions.get(accountNumber);
     }

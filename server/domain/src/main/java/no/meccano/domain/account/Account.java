@@ -1,4 +1,4 @@
-package no.meccano.domain;
+package no.meccano.domain.account;
 
 public class Account
 {

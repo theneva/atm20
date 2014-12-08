@@ -1,6 +1,6 @@
 package no.meccano.data;
 
-import no.meccano.domain.Account;
+import no.meccano.domain.account.Account;
 
 public interface AccountRepository
 {

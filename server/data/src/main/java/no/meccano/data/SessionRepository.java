@@ -1,9 +1,9 @@
 package no.meccano.data;
 
-import no.meccano.domain.Session;
+import no.meccano.domain.authentication.Session;
 
 public interface SessionRepository
 {
-    Session getByAccountNumber(final String accountNumber);
+    Session findByAccountNumber(final String accountNumber);
     Session createSession(final String accountNumber);
 }
