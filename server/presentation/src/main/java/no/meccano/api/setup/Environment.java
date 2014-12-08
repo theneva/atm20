@@ -7,7 +7,8 @@ import javax.ws.rs.Path;
 public class Environment
 {
     @GET
-    public String hello() {
+    public String hello()
+    {
         return "Hello world";
     }
 }

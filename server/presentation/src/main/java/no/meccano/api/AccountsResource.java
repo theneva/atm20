@@ -10,7 +10,8 @@ public class AccountsResource
 {
     @GET
     @Produces("application/json")
-    public Response accounts() {
+    public Response accounts()
+    {
         return Response.ok("hello").build();
     }
 }

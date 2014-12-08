@@ -6,25 +6,27 @@ public class Account
     private String middleName;
     private String lastName;
     private String address;
-    private String zipCode;
+    private String postalCode;
     private String region;
     private String state;
     private String country;
     private String accountNumber;
     private int balance;
+    private String pin;
 
-    public Account(final String firstName, final String middleName, final String lastName, final String address, final String zipCode, final String region, final String state, final String country, final String accountNumber, final int balance)
+    public Account(final String firstName, final String middleName, final String lastName, final String address, final String postalCode, final String region, final String state, final String country, final String accountNumber, final int balance, final String pin)
     {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.address = address;
-        this.zipCode = zipCode;
+        this.postalCode = postalCode;
         this.region = region;
         this.state = state;
         this.country = country;
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.pin = pin;
     }
 
     public String getFirstName()
@@ -67,14 +69,14 @@ public class Account
         this.address = address;
     }
 
-    public String getZipCode()
+    public String getPostalCode()
     {
-        return zipCode;
+        return postalCode;
     }
 
-    public void setZipCode(final String zipCode)
+    public void setPostalCode(final String postalCode)
     {
-        this.zipCode = zipCode;
+        this.postalCode = postalCode;
     }
 
     public String getRegion()
@@ -127,6 +129,16 @@ public class Account
         this.balance = balance;
     }
 
+    public String getPin()
+    {
+        return pin;
+    }
+
+    public void setPin(final String pin)
+    {
+        this.pin = pin;
+    }
+
     @Override
     public String toString()
     {
@@ -135,12 +147,13 @@ public class Account
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
-                ", zipCode='" + zipCode + '\'' +
+                ", postalCode='" + postalCode + '\'' +
                 ", region='" + region + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", balance=" + balance +
+                ", pin='" + pin + '\'' +
                 '}';
     }
 }
