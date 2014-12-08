@@ -2,8 +2,8 @@ package no.meccano.domain;
 
 public class AuthenticationAttempt
 {
-    public String pin;
-    public String accountNumber;
+    private String pin;
+    private String accountNumber;
 
     public String getPin()
     {
