@@ -16,18 +16,22 @@ var accounts = [
     }
 ];
 
-app.post('/', function (req, res) {
+app.post('/', function (req, res)
+{
 
     var id = req.body.id;
 
     var account = null;
-    accounts.forEach(function(element) {
-        if (element.id === id) {
+    accounts.forEach(function (element)
+    {
+        if (element.id === id)
+        {
             account = element;
         }
     });
 
-    if (!account) {
+    if (!account)
+    {
         return res.status(412).json({message: 'No account exists with id = ' + id});
     }
 

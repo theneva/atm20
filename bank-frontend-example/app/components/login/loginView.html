@@ -1,5 +1,63 @@
-<h2>Login</h2> LOL sd
-<form>
-    <label for="pin">Pin</label>
-    <input type="password" id="pin" placeholder="*****"/>
-</form>
+<div ng-controller="LoginCtrl">
+    <br/>
+    <h4 class="ui horizontal header divider">
+        Connect to account
+    </h4>
+
+    <div class="ui segment" style="background-color: transparent;">
+        <div class="ui two column middle aligned relaxed fitted stackable grid">
+            <div class="column">
+                <div class="ui horizontal divider">Account Info</div>
+                <div class="ui form" style="width: 300px;">
+
+                    <div class="field" style="width: 300px; margin-left: 10%; margin-top: 10%;">
+                        <label>NO CARD? <i>ENTER 11 (ELEVEN) DIGIT ACCOUNT NUMBER</i></label>
+
+                        <div class="ui left massive input">
+                            <input type="text" ng-model="accountNumber" maxlength="11" style="font-size: 1.5em; border: none;">
+                        </div>
+                    </div>
+
+                    <div class="field" style="width: 300px; margin-left: 10%; margin-top: 10%;">
+                        <label>ENTER 4 (FOUR) DIGIT PIN</label>
+
+                        <div class="ui right icon massive input loading">
+                            <input ng-disabled="hasPinBeenEntered()" maxlength="4" type="password" ng-model="pin" placeholder="****"
+                                   style="font-size: 1.9em; letter-spacing: 25px; border: none;">
+                            <i ng-show="hasPinBeenEntered()" class="search icon"></i>
+
+                            <p ng-show="wasInfoWrong" style="color: red;">Wrong details</p>
+                            <button ng-show="wasInfoWrong" ng-click="resetForm()" class="ui huge button">Retry</button>
+
+                            <p ng-show="enteredWrongInfoThreeTimes" style="color: red;">Your card has been retained.</p>
+                            <button ng-show="enteredWrongInfoThreeTimes" ng-click="resetATM()" class="ui huge button">Reset interface</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui vertical divider">
+
+            </div>
+            <div class="column">
+                <div class="massive ui buttons" style="width: 300px;">
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(1)">1</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(2)">2</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(3)">3</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(4)">4</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(5)">5</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(6)">6</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(7)">7</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(8)">8</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(9)">9</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="clearPin()"
+                         style="font-size: 1.1em; height: 61px; width: 86px; line-height: 2.2em;">Clear
+                    </div>
+                    <div class="ui {{disableKeypad}} button" ng-click="enterPinOrAccountNumber(0)">0</div>
+                    <div class="ui {{disableKeypad}} button" ng-click="clearPin()"
+                         style="font-size: 1.1em; height: 61px; width: 86px; line-height: 2.2em">Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

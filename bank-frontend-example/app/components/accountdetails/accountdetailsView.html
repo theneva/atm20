@@ -1,0 +1,40 @@
+<br/>
+<h4 class="ui horizontal header divider">
+    <i class="info icon"></i>Account Details
+</h4>
+<button ui-sref="loggedin" class="ui orange circular button"><i class="arrow left icon"></i> Return to overview</button>
+<div class="ui form segment">
+    <div class="two fields">
+        <div class="field">
+            <label>First Name</label>
+            <input placeholder="First Name" type="text" value="{{account.firstName}}">
+        </div>
+        <div class="field">
+            <label>Last Name</label>
+            <input placeholder="Last Name" type="text" value="{{account.lastName}}">
+        </div>
+    </div>
+    <div class="field">
+        <label>Account Number</label>
+        <input placeholder="Account number" disabled type="text" value="{{account.accountNumber}}">
+    </div>
+    <div class="field">
+        <label>Address</label>
+        <input placeholder="Address" type="text" value="Bråtenlia 9D">
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>Postal Code</label>
+            <input placeholder="Address" type="number" value="1929">
+        </div>
+        <div class="field">
+            <label>City</label>
+            <input placeholder="Address" type="text" value="Auli">
+        </div>
+    </div>
+    <div class="field">
+        <label>Password (optional - can be used if you need a replacement card)</label>
+        <input type="password">
+    </div>
+    <div class="ui submit button">Submit</div>
+</div>

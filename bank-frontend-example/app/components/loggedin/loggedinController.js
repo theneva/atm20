@@ -1,14 +1,20 @@
 angular.module('atmApp')
-.controller('LoggedInCtrl', ['$scope', function ($scope) {
+    .controller('LoggedInCtrl', ['$scope', '$rootScope', '$stateParams', '$state', 'Account', function ($scope, $rootScope, $stateParams, $state, Account)
+    {
+        $scope.account = Account.getInformation();
 
-        //$scope.accountBalanceInvisible = true;
-        $scope.revealButtonInvisible = false;
+        if (JSON.stringify($scope.account) == '{}') {
+            $state.go('login');
+        }
 
-        $scope.revealBalance = function () {
-            $scope.revealButtonInvisible = true;
-        };
 
-        $scope.hideBalance = function () {
-            $scope.revealButtonInvisible = false;
+        console.log($scope.account);
+
+
+        $scope.toggleButtonVisibilityBool = false;
+
+        $scope.toggleButtonVisibility = function ()
+        {
+            $scope.toggleButtonVisibilityBool = !$scope.toggleButtonVisibilityBool;
         };
     }]);
