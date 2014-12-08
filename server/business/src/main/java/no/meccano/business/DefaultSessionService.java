@@ -1,10 +1,11 @@
 package no.meccano.business;
 
 import no.meccano.data.SessionRepository;
+import no.meccano.domain.account.Account;
+import no.meccano.domain.account.AccountNumberValidator;
 import no.meccano.domain.authentication.AuthenticationAttempt;
 import no.meccano.domain.authentication.AuthenticationAttemptValidator;
 import no.meccano.domain.authentication.Session;
-import no.meccano.domain.account.AccountNumberValidator;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.NullArgumentException;
 
@@ -23,11 +24,26 @@ public class DefaultSessionService implements SessionService
     @Inject
     private AuthenticationAttemptValidator authenticationAttemptValidator;
 
+    @Inject
+    private AccountService accountService;
+
     @Override
-    public Session createSession(final AuthenticationAttempt authenticationAttempt) throws InvalidArgumentException, NullArgumentException
+    public Session createSession(final AuthenticationAttempt authenticationAttempt) throws InvalidArgumentException, NullArgumentException, InvalidCredentialsException
     {
         authenticationAttemptValidator.validate(authenticationAttempt);
-        return sessionRepository.createSession(authenticationAttempt.getAccountNumber());
+
+        final Account matchedAccount = accountService.findByAccountNumber(authenticationAttempt.getAccountNumber());
+
+        if (matchedAccount == null) {
+            throw new InvalidCredentialsException("No such account");
+        }
+
+        if (!authenticationAttempt.getPin().equals(matchedAccount.getPin()))
+        {
+            throw new InvalidCredentialsException("Invalid PIN");
+        }
+
+        return sessionRepository.createSession(matchedAccount);
     }
 
     @Override

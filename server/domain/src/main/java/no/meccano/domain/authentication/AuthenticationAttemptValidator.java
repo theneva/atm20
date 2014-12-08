@@ -5,5 +5,5 @@ import no.meccano.domain.common.NullArgumentException;
 
 public interface AuthenticationAttemptValidator
 {
-    public void validate(final AuthenticationAttempt authenticationAttempt) throws NullArgumentException, InvalidArgumentException;
+    void validate(final AuthenticationAttempt authenticationAttempt) throws NullArgumentException, InvalidArgumentException;
 }

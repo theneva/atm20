@@ -1,8 +1,8 @@
 package no.meccano.api;
 
 import no.meccano.business.AccountService;
+import no.meccano.business.InvalidCredentialsException;
 import no.meccano.business.SessionService;
-import no.meccano.domain.account.Account;
 import no.meccano.domain.authentication.AuthenticationAttempt;
 import no.meccano.domain.authentication.Session;
 import no.meccano.domain.common.InvalidArgumentException;
@@ -31,24 +31,16 @@ public class AuthenticationResource
     {
         try
         {
-            final Account matchedAccount = accountService.findByAccountNumber(attempt.getAccountNumber());
             final Session session = sessionService.createSession(attempt);
-
-            if (matchedAccount == null)
-            {
-                return Response.status(418).entity(new ErrorResponse("No such account")).build();
-            }
-
-            if (!attempt.getPin().equals(matchedAccount.getPin()))
-            {
-                return Response.status(401).entity(new ErrorResponse("Wrong pin")).build();
-            }
-
-            return Response.ok(matchedAccount).header("Authorization", session.getToken()).build();
+            return Response.ok(session.getAccount()).header("Authorization", session.getToken()).build();
         }
         catch (InvalidArgumentException | NullArgumentException e)
         {
             return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(e.getMessage())).build();
+        }
+        catch (InvalidCredentialsException e)
+        {
+            return Response.status(Response.Status.UNAUTHORIZED).entity(new ErrorResponse(e.getMessage())).build();
         }
     }
 }

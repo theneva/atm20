@@ -1,18 +1,20 @@
 package no.meccano.domain.authentication;
 
+import no.meccano.domain.account.Account;
+
 public class Session
 {
     private String token;
-    private String accountNumber;
+    private Account account;
 
     public Session()
     {
     }
 
-    public Session(final String token, final String accountNumber)
+    public Session(final String token, final Account account)
     {
         this.token = token;
-        this.accountNumber = accountNumber;
+        this.account = account;
     }
 
     public String getToken()
@@ -25,13 +27,22 @@ public class Session
         this.token = token;
     }
 
-    public String getAccountNumber()
+    public Account getAccount()
     {
-        return accountNumber;
+        return account;
     }
 
-    public void setAccountNumber(final String accountNumber)
+    public void setAccount(final Account account)
     {
-        this.accountNumber = accountNumber;
+        this.account = account;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Session{" +
+                "token='" + token + '\'' +
+                ", account=" + account +
+                '}';
     }
 }

@@ -1,8 +1,10 @@
 package no.meccano.data;
 
+import no.meccano.domain.account.Account;
 import no.meccano.domain.authentication.Session;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -10,7 +12,10 @@ import java.util.UUID;
 @ApplicationScoped
 public class MapSessionRepository implements SessionRepository
 {
-    final Map<String, Session> sessions = new HashMap<>();
+    @Inject
+    private AccountRepository accountRepository;
+
+    private final Map<String, Session> sessions = new HashMap<>();
 
     @Override
     public Session findByAccountNumber(final String accountNumber)
@@ -19,10 +24,11 @@ public class MapSessionRepository implements SessionRepository
     }
 
     @Override
-    public Session createSession(final String accountNumber)
+    public Session createSession(final Account account)
     {
-        final Session session = new Session(UUID.randomUUID().toString().toUpperCase(), accountNumber);
-        sessions.put(accountNumber, session);
+        final String token = UUID.randomUUID().toString().toUpperCase();
+        final Session session = new Session(token, account);
+        sessions.put(account.getAccountNumber(), session);
         return session;
     }
 }
