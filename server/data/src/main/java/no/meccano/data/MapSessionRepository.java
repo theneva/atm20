@@ -6,9 +6,7 @@ import no.meccano.domain.authentication.Session;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @ApplicationScoped
 public class MapSessionRepository implements SessionRepository
@@ -50,5 +48,11 @@ public class MapSessionRepository implements SessionRepository
         }
 
         return destroyedSession;
+    }
+
+    @Override
+    public List<Session> findAll()
+    {
+        return new ArrayList<>(sessions.values());
     }
 }

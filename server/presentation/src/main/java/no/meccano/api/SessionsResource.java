@@ -24,6 +24,12 @@ public class SessionsResource
     @Inject
     private SessionService sessionService;
 
+    @GET
+    @Produces("application/json")
+    public Response findAll() {
+        return Response.ok(sessionService.findAll()).build();
+    }
+
     @POST
     @Consumes("application/json")
     @Produces("application/json")

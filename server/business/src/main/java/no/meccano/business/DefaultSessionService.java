@@ -10,6 +10,7 @@ import no.meccano.domain.common.NullArgumentException;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 @Stateless
 public class DefaultSessionService implements SessionService
@@ -28,6 +29,12 @@ public class DefaultSessionService implements SessionService
 
     @Inject
     private TokenValidator tokenValidator;
+
+    @Override
+    public List<Session> findAll()
+    {
+        return sessionRepository.findAll();
+    }
 
     @Override
     public Session createSession(final AuthenticationAttempt authenticationAttempt) throws InvalidArgumentException, NullArgumentException, InvalidCredentialsException
