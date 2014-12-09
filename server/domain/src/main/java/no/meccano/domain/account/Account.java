@@ -1,5 +1,8 @@
 package no.meccano.domain.account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Account
 {
     private String firstName;
@@ -13,8 +16,9 @@ public class Account
     private String accountNumber;
     private int balance;
     private String pin;
+    private List<PendingPayment> pendingPayments = new ArrayList<>();
 
-    public Account(final String firstName, final String middleName, final String lastName, final String address, final String postalCode, final String region, final String state, final String country, final String accountNumber, final int balance, final String pin)
+    public Account(final String firstName, final String middleName, final String lastName, final String address, final String postalCode, final String region, final String state, final String country, final String accountNumber, final int balance, final String pin, final List<PendingPayment> pendingPayments)
     {
         this.firstName = firstName;
         this.middleName = middleName;
@@ -27,6 +31,7 @@ public class Account
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.pin = pin;
+        this.pendingPayments = pendingPayments;
     }
 
     public String getFirstName()
@@ -139,21 +144,32 @@ public class Account
         this.pin = pin;
     }
 
+    public List<PendingPayment> getPendingPayments()
+    {
+        return pendingPayments;
+    }
+
+    public void setPendingPayments(final List<PendingPayment> pendingPayments)
+    {
+        this.pendingPayments = pendingPayments;
+    }
+
     @Override
     public String toString()
     {
         return "Account{" +
-                "firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", region='" + region + '\'' +
-                ", state='" + state + '\'' +
-                ", country='" + country + '\'' +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", balance=" + balance +
+                "pendingPayments=" + pendingPayments +
                 ", pin='" + pin + '\'' +
+                ", balance=" + balance +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", region='" + region + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", address='" + address + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 '}';
     }
 }
