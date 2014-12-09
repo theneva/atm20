@@ -1,7 +1,7 @@
 package no.meccano.api;
 
 import no.meccano.business.AccountService;
-import no.meccano.business.InvalidCredentialsException;
+import no.meccano.domain.common.InvalidCredentialsException;
 import no.meccano.business.SessionService;
 import no.meccano.domain.authentication.AuthenticationAttempt;
 import no.meccano.domain.authentication.Session;

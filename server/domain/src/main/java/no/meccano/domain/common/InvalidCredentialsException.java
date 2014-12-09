@@ -1,4 +1,4 @@
-package no.meccano.business;
+package no.meccano.domain.common;
 
 public class InvalidCredentialsException extends Exception
 {

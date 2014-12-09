@@ -7,6 +7,7 @@ import no.meccano.domain.authentication.AuthenticationAttempt;
 import no.meccano.domain.authentication.AuthenticationAttemptValidator;
 import no.meccano.domain.authentication.Session;
 import no.meccano.domain.common.InvalidArgumentException;
+import no.meccano.domain.common.InvalidCredentialsException;
 import no.meccano.domain.common.NullArgumentException;
 
 import javax.ejb.Stateless;
