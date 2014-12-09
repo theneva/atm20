@@ -19,9 +19,15 @@ public class MapSessionRepository implements SessionRepository
     private final Map<String, Session> sessions = new HashMap<>();
 
     @Override
-    public Session findByToken(final String token)
+    public Session findByToken(final String token) throws NoSuchSessionException
     {
-        return sessions.get(token);
+        final Session retrievedSession = sessions.get(token);
+
+        if (retrievedSession == null) {
+            throw new NoSuchSessionException(token);
+        }
+
+        return retrievedSession;
     }
 
     @Override

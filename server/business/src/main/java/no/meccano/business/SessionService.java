@@ -11,7 +11,7 @@ public interface SessionService
 {
     Session createSession(final AuthenticationAttempt authenticationAttempt) throws InvalidArgumentException, NullArgumentException, InvalidCredentialsException;
 
-    Session findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException;
+    Session findByToken(final String accountNumber) throws InvalidArgumentException, NullArgumentException, NoSuchSessionException;
 
     Session destroySessionByToken(final String token) throws InvalidArgumentException, NoSuchSessionException;
 }

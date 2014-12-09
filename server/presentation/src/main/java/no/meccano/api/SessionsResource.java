@@ -13,9 +13,11 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("sessions")
-public class SessionResource
+@Path(SessionsResource.PATH)
+public class SessionsResource
 {
+    public static final String PATH = "sessions";
+
     @Inject
     private AccountService accountService;
 

@@ -6,7 +6,7 @@ import no.meccano.domain.authentication.Session;
 
 public interface SessionRepository
 {
-    Session findByToken(final String accountNumber);
+    Session findByToken(final String accountNumber) throws NoSuchSessionException;
 
     Session createSession(final Account account);
 

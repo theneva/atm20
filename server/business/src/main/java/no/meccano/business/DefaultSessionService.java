@@ -49,10 +49,10 @@ public class DefaultSessionService implements SessionService
     }
 
     @Override
-    public Session findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException
+    public Session findByToken(final String token) throws InvalidArgumentException, NullArgumentException, NoSuchSessionException
     {
-        accountNumberValidator.validate(accountNumber);
-        return sessionRepository.findByToken(accountNumber);
+        tokenValidator.validate(token);
+        return sessionRepository.findByToken(token);
     }
 
     @Override

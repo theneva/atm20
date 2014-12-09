@@ -5,9 +5,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("accounts")
+@Path(AccountsResource.PATH)
 public class AccountsResource
 {
+    public static final String PATH = "accounts";
+
     @GET
     @Produces("application/json")
     public Response accounts()
