@@ -13,11 +13,13 @@ public class DefaultAccountNumberValidator implements AccountNumberValidator
     @Override
     public void validate(final String accountNumber) throws NullArgumentException, InvalidArgumentException
     {
-        if (accountNumber == null) {
+        if (accountNumber == null)
+        {
             throw new NullArgumentException("accountNumber");
         }
 
-        if (!accountNumber.matches("[0-9]{" + DIGITS_IN_ACCOUNT_NUMBER + "}")) {
+        if (!accountNumber.matches("[0-9]{" + DIGITS_IN_ACCOUNT_NUMBER + "}"))
+        {
             throw new InvalidArgumentException(accountNumber, "Account number must be consist of exactly " + DIGITS_IN_ACCOUNT_NUMBER + " digits");
         }
     }

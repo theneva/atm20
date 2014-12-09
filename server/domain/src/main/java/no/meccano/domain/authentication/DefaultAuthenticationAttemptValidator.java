@@ -24,7 +24,8 @@ public class DefaultAuthenticationAttemptValidator implements AuthenticationAtte
             throw new NullArgumentException("authenticationAttempt");
         }
 
-        if (authenticationAttempt.getPin() == null) {
+        if (authenticationAttempt.getPin() == null)
+        {
             throw new NullArgumentException("authenticationAttempt.pin");
         }
 

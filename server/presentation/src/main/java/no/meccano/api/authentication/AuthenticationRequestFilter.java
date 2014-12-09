@@ -26,12 +26,14 @@ public class AuthenticationRequestFilter implements ContainerRequestFilter
     @Override
     public void filter(final ContainerRequestContext requestContext) throws IOException
     {
-        if ("OPTIONS".equals(requestContext.getMethod())) {
+        if ("OPTIONS".equals(requestContext.getMethod()))
+        {
             // Angular stuff.
             return;
         }
 
-        if (requestContext.getUriInfo().getPath().equals(SessionsResource.PATH) && requestContext.getMethod().equals("POST")) {
+        if (requestContext.getUriInfo().getPath().equals(SessionsResource.PATH) && requestContext.getMethod().equals("POST"))
+        {
             return;
         }
 

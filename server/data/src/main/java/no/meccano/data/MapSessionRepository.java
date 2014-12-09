@@ -23,7 +23,8 @@ public class MapSessionRepository implements SessionRepository
     {
         final Session retrievedSession = sessions.get(token);
 
-        if (retrievedSession == null) {
+        if (retrievedSession == null)
+        {
             throw new NoSuchSessionException(token);
         }
 
@@ -43,7 +44,8 @@ public class MapSessionRepository implements SessionRepository
     {
         final Session destroyedSession = sessions.remove(token);
 
-        if (destroyedSession == null) {
+        if (destroyedSession == null)
+        {
             throw new NoSuchSessionException(token);
         }
 

@@ -36,7 +36,8 @@ public class DefaultSessionService implements SessionService
 
         final Account matchedAccount = accountService.findByAccountNumber(authenticationAttempt.getAccountNumber());
 
-        if (matchedAccount == null) {
+        if (matchedAccount == null)
+        {
             throw new InvalidCredentialsException("No such account");
         }
 

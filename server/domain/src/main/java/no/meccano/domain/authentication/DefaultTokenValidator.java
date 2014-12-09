@@ -14,7 +14,8 @@ public class DefaultTokenValidator implements TokenValidator
     @Override
     public void validate(final String token) throws InvalidArgumentException, NullArgumentException
     {
-        if (token == null) {
+        if (token == null)
+        {
             throw new NullArgumentException("token");
         }
 
