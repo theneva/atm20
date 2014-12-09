@@ -1,6 +1,6 @@
 package no.meccano.business;
 
-import no.meccano.data.SessionRepository;
+import no.meccano.data.SessionsRepository;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.AccountNumberValidator;
 import no.meccano.domain.authentication.*;
@@ -13,10 +13,10 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Stateless
-public class DefaultSessionService implements SessionService
+public class DefaultSessionsService implements SessionsService
 {
     @Inject
-    private SessionRepository sessionRepository;
+    private SessionsRepository sessionsRepository;
 
     @Inject
     private AccountNumberValidator accountNumberValidator;
@@ -33,7 +33,7 @@ public class DefaultSessionService implements SessionService
     @Override
     public List<Session> findAll()
     {
-        return sessionRepository.findAll();
+        return sessionsRepository.findAll();
     }
 
     @Override
@@ -53,20 +53,20 @@ public class DefaultSessionService implements SessionService
             throw new InvalidCredentialsException("Invalid PIN");
         }
 
-        return sessionRepository.createSession(matchedAccount);
+        return sessionsRepository.createSession(matchedAccount);
     }
 
     @Override
     public Session findByToken(final String token) throws InvalidArgumentException, NullArgumentException, NoSuchSessionException
     {
         tokenValidator.validate(token);
-        return sessionRepository.findByToken(token);
+        return sessionsRepository.findByToken(token);
     }
 
     @Override
     public Session destroySessionByToken(final String token) throws InvalidArgumentException, NoSuchSessionException, NullArgumentException
     {
         tokenValidator.validate(token);
-        return sessionRepository.destroyByToken(token);
+        return sessionsRepository.destroyByToken(token);
     }
 }

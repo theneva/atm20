@@ -9,7 +9,7 @@ import no.meccano.domain.common.NullArgumentException;
 
 import java.util.List;
 
-public interface SessionService
+public interface SessionsService
 {
     List<Session> findAll();
 

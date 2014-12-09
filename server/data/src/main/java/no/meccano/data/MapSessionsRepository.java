@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.util.*;
 
 @ApplicationScoped
-public class MapSessionRepository implements SessionRepository
+public class MapSessionsRepository implements SessionsRepository
 {
     @Inject
     private AccountRepository accountRepository;
@@ -19,6 +19,9 @@ public class MapSessionRepository implements SessionRepository
     @Override
     public Session findByToken(final String token) throws NoSuchSessionException
     {
+        // TODO: Remove this.
+        insertDummyAndreasData();
+
         final Session retrievedSession = sessions.get(token);
 
         if (retrievedSession == null)
@@ -27,6 +30,13 @@ public class MapSessionRepository implements SessionRepository
         }
 
         return retrievedSession;
+    }
+
+    private void insertDummyAndreasData()
+    {
+        final String andreasAccountNumber = "55555555555";
+        final String andreasToken = "AD5C7873-60E7-4A47-BA40-380C900DFAF5";
+        sessions.put(andreasToken, new Session(andreasToken, accountRepository.findByAccountNumber(andreasAccountNumber)));
     }
 
     @Override
@@ -53,6 +63,7 @@ public class MapSessionRepository implements SessionRepository
     @Override
     public List<Session> findAll()
     {
+        insertDummyAndreasData();
         return new ArrayList<>(sessions.values());
     }
 }

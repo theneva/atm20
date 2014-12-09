@@ -1,7 +1,7 @@
 package no.meccano.api;
 
 import no.meccano.business.AccountService;
-import no.meccano.business.SessionService;
+import no.meccano.business.SessionsService;
 import no.meccano.domain.authentication.AuthenticationAttempt;
 import no.meccano.domain.authentication.NoSuchSessionException;
 import no.meccano.domain.authentication.Session;
@@ -22,12 +22,12 @@ public class SessionsResource
     private AccountService accountService;
 
     @Inject
-    private SessionService sessionService;
+    private SessionsService sessionsService;
 
     @GET
     @Produces("application/json")
     public Response findAll() {
-        return Response.ok(sessionService.findAll()).build();
+        return Response.ok(sessionsService.findAll()).build();
     }
 
     @POST
@@ -37,7 +37,7 @@ public class SessionsResource
     {
         try
         {
-            final Session session = sessionService.createSession(attempt);
+            final Session session = sessionsService.createSession(attempt);
             return Response.status(201)
                     .entity(session.getAccount())
                     .header("Authorization", session.getToken())
@@ -63,7 +63,7 @@ public class SessionsResource
     {
         try
         {
-            sessionService.destroySessionByToken(token);
+            sessionsService.destroySessionByToken(token);
             return Response.status(Response.Status.NO_CONTENT).build();
         }
         catch (NoSuchSessionException e)
