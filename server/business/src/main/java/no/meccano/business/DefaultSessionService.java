@@ -3,9 +3,7 @@ package no.meccano.business;
 import no.meccano.data.SessionRepository;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.AccountNumberValidator;
-import no.meccano.domain.authentication.AuthenticationAttempt;
-import no.meccano.domain.authentication.AuthenticationAttemptValidator;
-import no.meccano.domain.authentication.Session;
+import no.meccano.domain.authentication.*;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.InvalidCredentialsException;
 import no.meccano.domain.common.NullArgumentException;
@@ -27,6 +25,9 @@ public class DefaultSessionService implements SessionService
 
     @Inject
     private AccountService accountService;
+
+    @Inject
+    private TokenValidator tokenValidator;
 
     @Override
     public Session createSession(final AuthenticationAttempt authenticationAttempt) throws InvalidArgumentException, NullArgumentException, InvalidCredentialsException
@@ -51,6 +52,13 @@ public class DefaultSessionService implements SessionService
     public Session findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException
     {
         accountNumberValidator.validate(accountNumber);
-        return sessionRepository.findByAccountNumber(accountNumber);
+        return sessionRepository.findByToken(accountNumber);
+    }
+
+    @Override
+    public Session destroySessionByToken(final String token) throws InvalidArgumentException, NoSuchSessionException
+    {
+        tokenValidator.validate(token);
+        return sessionRepository.destroyByToken(token);
     }
 }

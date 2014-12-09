@@ -1,6 +1,7 @@
 package no.meccano.data;
 
 import no.meccano.domain.account.Account;
+import no.meccano.domain.authentication.NoSuchSessionException;
 import no.meccano.domain.authentication.Session;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -18,9 +19,9 @@ public class MapSessionRepository implements SessionRepository
     private final Map<String, Session> sessions = new HashMap<>();
 
     @Override
-    public Session findByAccountNumber(final String accountNumber)
+    public Session findByToken(final String token)
     {
-        return sessions.get(accountNumber);
+        return sessions.get(token);
     }
 
     @Override
@@ -28,7 +29,18 @@ public class MapSessionRepository implements SessionRepository
     {
         final String token = UUID.randomUUID().toString().toUpperCase();
         final Session session = new Session(token, account);
-        sessions.put(account.getAccountNumber(), session);
+        sessions.put(token, session);
         return session;
+    }
+
+    public Session destroyByToken(final String token) throws NoSuchSessionException
+    {
+        final Session destroyedSession = sessions.remove(token);
+
+        if (destroyedSession == null) {
+            throw new NoSuchSessionException(token);
+        }
+
+        return destroyedSession;
     }
 }
