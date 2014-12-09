@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 @Path(SessionsResource.PATH)
 public class SessionsResource
 {
-    public static final String PATH = "sessions";
+    public static final String PATH = "/sessions";
 
     @Inject
     private AccountService accountService;
@@ -32,21 +32,28 @@ public class SessionsResource
         try
         {
             final Session session = sessionService.createSession(attempt);
-            return Response.ok(session.getAccount()).header("Authorization", session.getToken()).build();
+            return Response.status(201)
+                    .entity(session.getAccount())
+                    .header("Authorization", session.getToken())
+                    .build();
         }
         catch (InvalidArgumentException | NullArgumentException e)
         {
-            return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(e.getMessage())).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorResponse(e.getMessage()))
+                    .build();
         }
         catch (InvalidCredentialsException e)
         {
-            return Response.status(Response.Status.UNAUTHORIZED).entity(new ErrorResponse(e.getMessage())).build();
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new ErrorResponse(e.getMessage()))
+                    .build();
         }
     }
 
     @DELETE
-    @Consumes("application/json")
-    public Response destroySession(final String token)
+    @Produces("application/json")
+    public Response destroySession(@HeaderParam("Authorization") final String token)
     {
         try
         {
@@ -57,7 +64,7 @@ public class SessionsResource
         {
             return Response.status(420).build();
         }
-        catch (InvalidArgumentException e)
+        catch (InvalidArgumentException | NullArgumentException e)
         {
             return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(e.getMessage())).build();
         }

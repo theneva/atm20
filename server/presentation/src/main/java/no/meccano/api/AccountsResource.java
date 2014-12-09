@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 @Path(AccountsResource.PATH)
 public class AccountsResource
 {
-    public static final String PATH = "accounts";
+    public static final String PATH = "/accounts";
 
     @GET
     @Produces("application/json")

@@ -13,5 +13,5 @@ public interface SessionService
 
     Session findByToken(final String accountNumber) throws InvalidArgumentException, NullArgumentException, NoSuchSessionException;
 
-    Session destroySessionByToken(final String token) throws InvalidArgumentException, NoSuchSessionException;
+    Session destroySessionByToken(final String token) throws InvalidArgumentException, NoSuchSessionException, NullArgumentException;
 }

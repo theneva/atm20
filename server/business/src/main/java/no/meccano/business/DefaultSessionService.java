@@ -56,7 +56,7 @@ public class DefaultSessionService implements SessionService
     }
 
     @Override
-    public Session destroySessionByToken(final String token) throws InvalidArgumentException, NoSuchSessionException
+    public Session destroySessionByToken(final String token) throws InvalidArgumentException, NoSuchSessionException, NullArgumentException
     {
         tokenValidator.validate(token);
         return sessionRepository.destroyByToken(token);
