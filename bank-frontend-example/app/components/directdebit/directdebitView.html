@@ -1,0 +1,26 @@
+<h3 class="ui right floated header">{{account.firstName}} {{account.lastName}} (#{{account.accountNumber}})</h3>
+<br/>
+<h4 class="ui horizontal header divider">
+    Cancel Direct Debit Payments
+</h4>
+<home-button class=""></home-button>
+<table class="ui table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>To</th>
+        <th>Due Date (each month)</th>
+        <th>Amount (NOK)</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="payment in account.debitPayments">
+        <td>{{payment._id}}</td>
+        <td>{{payment.receiver}}</td>
+        <td>{{payment.dueDate}}</td>
+        <td>{{payment.pendingAmount}}</td>
+        <td><button ng-click="cancelDirectDebitPayment(payment)" class="ui medium red button">Cancel</button> </td>
+    </tr>
+    </tbody>
+</table>

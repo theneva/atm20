@@ -11,7 +11,17 @@ angular.module('atmApp')
                 };
 
                 //return $http.get('http://10.21.24.124:8080/api/' + accountNumber + '/' + pinNumber);
-                return $http.post('http://localhost:8081/presentation-1.0.0-SNAPSHOT/api/authenticate', account);
+                return $http.post('http://10.21.24.126:8081/presentation-1.0.0-SNAPSHOT/api/sessions', account);
+                //return $http.post('http://localhost:8080/api/', account);
+            },
+            destroySession: function (token) {
+                return $http({
+                    url: 'http://10.21.24.126:8081/presentation-1.0.0-SNAPSHOT/api/sessions',
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: token
+                    }
+                });
             }
         }
     }]);

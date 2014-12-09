@@ -1,5 +1,5 @@
 angular.module('atmApp')
-    .controller('LoginCtrl', ['$scope', '$rootScope', '$document', '$http', '$state', 'Account', 'VerifyPin', function ($scope, $rootScope, $document, $http, $state, Account, VerifyPin)
+    .controller('LoginCtrl', ['$scope', '$rootScope', '$document', '$http', '$state', 'Account', 'Authentication', function ($scope, $rootScope, $document, $http, $state, Account, Authentication)
     {
 
         var requestHasBeenSent = false;
@@ -37,28 +37,30 @@ angular.module('atmApp')
 
                 if (!requestHasBeenSent)
                 {
-                    VerifyPin.verify($scope.accountNumber, $scope.pin)
-                        .then(function (result)
+                    Authentication.verify($scope.accountNumber, $scope.pin)
+                        .then(function (response)
                         {
-                            return result.data;
+                            return response;
                         })
-                        .then(function (data)
+                        .then(function (response)
                         {
-                            if (data.message !== "NOPE")
+                            var headers = response.headers();
+                            var data = response.data;
+
+                            if (data.message !== "No such account")
                             {
+                                Account.setToken(headers['authorization']);
                                 Account.setInformation(data);
                                 $state.go('loggedin');
                             }
                             else
                             {
                                 // Info entered was wrong
-                                console.log("WRONG");
                                 $scope.infoWrongCount += 1;
                                 if ($scope.infoWrongCount == 3) {
                                     Account.updateWrongPinCount('');
                                     $scope.wasInfoWrong = false;
                                     $scope.enteredWrongInfoThreeTimes = true;
-                                    //alert('Three wrongs ain\'t no right!');
                                 } else {
                                     $scope.wasInfoWrong = true;
                                 }

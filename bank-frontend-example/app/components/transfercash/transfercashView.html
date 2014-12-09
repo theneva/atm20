@@ -1,0 +1,46 @@
+<h3 class="ui right floated header">{{account.firstName}} {{account.lastName}} (#{{account.accountNumber}})</h3>
+
+<br/>
+<h4 class="ui horizontal header divider">
+    Transfer Cash
+</h4>
+<home-button class=""></home-button>
+<br/>
+<br/>
+<div class="ui form">
+    <h4 class="ui dividing header">Transaction Details</h4>
+
+    <div class="two fields">
+        <div class="field">
+            <label>Name</label>
+
+            <div class="two fields">
+                <div class="field">
+                    <input type="text" name="first-name" placeholder="First Name">
+                </div>
+                <div class="field">
+                    <input type="text" name="last-name" placeholder="Last Name">
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label>Gender</label>
+
+            <div class="ui selection dropdown">
+                <input type="hidden" name="gender">
+
+                <div class="default text">Gender</div>
+                <i class="dropdown icon"></i>
+
+                <div class="menu">
+                    <div class="item" data-value="male">Male</div>
+                    <div class="item" data-value="female">Female</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label>KID number</label>
+        <input type="text" placeholder="KID"/>
+    </div>
+</div>

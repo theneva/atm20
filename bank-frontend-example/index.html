@@ -4,19 +4,6 @@
     <meta charset="UTF-8">
     <title>ATM 2.0</title>
 
-    <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.js"></script>
-    <script src="app/app.routes.js"></script>
-    <script src="app/components/loggedin/loggedinController.js"></script>
-    <script src="app/components/login/loginServices.js"></script>
-    <script src="app/components/login/loginController.js"></script>
-    <script src="app/components/accountdetails/accountdetailsController.js"></script>
-
-    <!-- JavaScript libraries -->
-    <script src="assets/libs/semantic.js"></script>
-
-
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/css/semantic.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
@@ -27,5 +14,32 @@
     <br/>
     <ui-view/>
 </div>
+
+
+<!-- Angular Assets -->
+<script src="assets/libs/angular.min.js"></script>
+<script src="assets/libs/angular-ui-router.js"></script>
+
+<!-- Angular Routes ++ -->
+<script src="app/app.routes.js"></script>
+
+<!-- Angular Components (Controllers) -->
+<script src="app/components/login/loginServices.js"></script>
+<script src="app/components/login/loginController.js"></script>
+<script src="app/components/loggedin/loggedinController.js"></script>
+<script src="app/components/accountdetails/accountdetailsController.js"></script>
+<script src="app/components/directdebit/directdebitController.js"></script>
+<script src="app/components/directdebit/directdebitServices.js"></script>
+<script src="app/components/transfercash/transfercashController.js"></script>
+<script src="app/components/transfercash/transfercashServices.js"></script>
+<script src="app/components/paybill/paybillController.js"></script>
+<script src="app/components/withdrawcash/withdrawcashController.js"></script>
+
+<!-- Angular Shared (Directives, etc.) -->
+<script src="app/shared/homenavigationbutton/homenavigationbuttonDirective.js"></script>
+
+
+<!-- JavaScript libraries -->
+<script src="assets/libs/semantic.js"></script>
 </body>
 </html>

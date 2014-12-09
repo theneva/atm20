@@ -1,7 +1,7 @@
 var app = angular.module('atmApp', ['ui.router']);
 
 app
-    .config(function ($stateProvider, $urlRouterProvider, $provide, $locationProvider)
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider)
     {
         $urlRouterProvider.otherwise('login');
 
@@ -23,16 +23,48 @@ app
             })
             .state('withdrawcash', {
                 url: '/withdraw-cash',
-                templateUrl: 'app/components/withdrawcash/withdrawcashView.html'
+                templateUrl: 'app/components/withdrawcash/withdrawcashView.html',
+                controller: 'WithdrawCashCtrl'
+            })
+            .state('directdebit', {
+                url: '/direct-debit',
+                templateUrl: 'app/components/directdebit/directdebitView.html',
+                controller: 'DirectDebitCtrl'
+            })
+            .state('transfercash', {
+                url: '/transfer-cash',
+                templateUrl: 'app/components/transfercash/transfercashView.html',
+                controller: 'TransferCashCtrl'
+            })
+            .state('paybill', {
+                url: '/pay-bill',
+                templateUrl: 'app/components/paybill/paybillView.html',
+                controller: 'PayBillCtrl'
             })
         ;
 
         //$urlRouterProvider.html5mode(true);
 
     })
+    .factory('HttpRequestInterceptor', function () {
+        return {
+            request: function (config, token)
+            {
+
+                // use this to destroying other existing headers
+                config.headers = {'Authorization': token};
+
+                // use this to prevent destroying other existing headers
+                // config.headers['Authorization'] = 'authentication;
+
+                return config;
+            }
+        };
+    })
     .factory('Account', ['$http', function ($http)
     {
         var loggedInAccount = {};
+        var sessionToken = "";
 
         return {
             setInformation: function (account)
@@ -47,6 +79,14 @@ app
             updateWrongPinCount: function (accountInfo) {
 
                 $http.post('/api', { /*AccountNumber*/ });
+            },
+            setToken: function (token) {
+                console.log(token);
+                sessionToken = token;
+                return token;
+            },
+            getToken: function () {
+                return sessionToken;
             }
         }
     }])

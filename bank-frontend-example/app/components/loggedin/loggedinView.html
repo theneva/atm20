@@ -4,7 +4,8 @@
 <h4 class="ui horizontal header divider">
     ATM Services
 </h4>
-<div ng-controller="LoggedInCtrl">
+<div>
+    <button class="ui button" ng-click="testAccount()">TEST SHIT</button>
     <div class="ui cards">
         <div class="card" style="height: 150px;">
             <div class="content">
@@ -32,10 +33,10 @@
                 </div>
                 <div class="description">
                     <div class="ui buttons">
-                        <div class="large ui button" style="height: 70px; width: 126px; line-height: 45px;">Pay whole
+                        <div ui-sref="paybill" class="large ui button" style="height: 70px; width: 126px; line-height: 45px;">Pay whole
                         </div>
                         <div class="or" style="margin-top: 20px;"></div>
-                        <div class="large ui positive button" style="height: 70px; width: 126px; line-height: 45px;">Pay
+                        <div ui-sref="paybill" class="large ui positive button" style="height: 70px; width: 126px; line-height: 45px;">Pay
                             part
                         </div>
                     </div>
@@ -71,7 +72,7 @@
                     <span class="date">(cancel payments)</span>
                 </div>
                 <div class="description">
-                    <button class="huge ui button">Browse Pending Payments</button>
+                    <button ui-sref="directdebit" class="huge ui button">Browse Pending Payments</button>
                 </div>
             </div>
         </div>
@@ -112,7 +113,7 @@
                     <span class="date">(to same or different bank)</span>
                 </div>
                 <div class="description">
-                    <button class="huge ui button" style="min-height: 71px; width: 257px;">Transfer Cash</button>
+                    <button ui-sref="transfercash" class="huge ui button" style="min-height: 71px; width: 257px;">Transfer Cash</button>
                 </div>
             </div>
         </div>
@@ -138,7 +139,7 @@
                     <span class="date">(quit ATM session)</span>
                 </div>
                 <div class="description">
-                    <button ui-sref="login" class="huge negative ui button" style="min-height: 71px; width: 257px;">Log
+                    <button ng-click="logout()" class="huge negative ui button" style="min-height: 71px; width: 257px;">Log
                         Out
                     </button>
                 </div>
