@@ -7,114 +7,30 @@ import java.util.List;
 
 public class Account
 {
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String address;
-    private String postalCode;
-    private String region;
-    private String state;
-    private String country;
+    private PersonalDetails personalDetails;
     private String accountNumber;
     private int balance;
     private String pin;
     private int failedPinAttempts = 0;
     private List<PendingPayment> pendingPayments = new ArrayList<>();
 
-    public Account(final String firstName, final String middleName, final String lastName, final String address, final String postalCode, final String region, final String state, final String country, final String accountNumber, final int balance, final String pin, final List<PendingPayment> pendingPayments)
+    public Account(final PersonalDetails personalDetails, final String accountNumber, final int balance, final String pin, final List<PendingPayment> pendingPayments)
     {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.address = address;
-        this.postalCode = postalCode;
-        this.region = region;
-        this.state = state;
-        this.country = country;
+        this.personalDetails = personalDetails;
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.pin = pin;
         this.pendingPayments = pendingPayments;
     }
 
-    public String getFirstName()
+    public PersonalDetails getPersonalDetails()
     {
-        return firstName;
+        return personalDetails;
     }
 
-    public void setFirstName(final String firstName)
+    public void setPersonalDetails(final PersonalDetails personalDetails)
     {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName()
-    {
-        return middleName;
-    }
-
-    public void setMiddleName(final String middleName)
-    {
-        this.middleName = middleName;
-    }
-
-    public String getLastName()
-    {
-        return lastName;
-    }
-
-    public void setLastName(final String lastName)
-    {
-        this.lastName = lastName;
-    }
-
-    public String getAddress()
-    {
-        return address;
-    }
-
-    public void setAddress(final String address)
-    {
-        this.address = address;
-    }
-
-    public String getPostalCode()
-    {
-        return postalCode;
-    }
-
-    public void setPostalCode(final String postalCode)
-    {
-        this.postalCode = postalCode;
-    }
-
-    public String getRegion()
-    {
-        return region;
-    }
-
-    public void setRegion(final String region)
-    {
-        this.region = region;
-    }
-
-    public String getState()
-    {
-        return state;
-    }
-
-    public void setState(final String state)
-    {
-        this.state = state;
-    }
-
-    public String getCountry()
-    {
-        return country;
-    }
-
-    public void setCountry(final String country)
-    {
-        this.country = country;
+        this.personalDetails = personalDetails;
     }
 
     public String getAccountNumber()
@@ -171,14 +87,7 @@ public class Account
     public String toString()
     {
         return "Account{" +
-                "firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", region='" + region + '\'' +
-                ", state='" + state + '\'' +
-                ", country='" + country + '\'' +
+                "personalDetails=" + personalDetails +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", balance=" + balance +
                 ", pin='" + pin + '\'' +

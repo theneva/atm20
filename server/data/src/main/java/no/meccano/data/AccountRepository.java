@@ -10,4 +10,6 @@ public interface AccountRepository
     PendingPayment cancelPayment(final Account account, final PendingPayment pendingPayment);
 
     PendingPayment createPendingPayment(final Account account, final PendingPayment pendingPayment);
+
+    Account update(Account account);
 }

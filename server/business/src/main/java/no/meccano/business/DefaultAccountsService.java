@@ -1,11 +1,13 @@
 package no.meccano.business;
 
 import no.meccano.data.AccountRepository;
-import no.meccano.domain.account.payment.PendingPaymentValidator;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.AccountNumberValidator;
-import no.meccano.domain.account.payment.PendingPayment;
+import no.meccano.domain.account.PersonalDetails;
+import no.meccano.domain.account.PersonalDetailsValidator;
 import no.meccano.domain.account.payment.NoSuchPaymentException;
+import no.meccano.domain.account.payment.PendingPayment;
+import no.meccano.domain.account.payment.PendingPaymentValidator;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.NullArgumentException;
 
@@ -23,6 +25,9 @@ public class DefaultAccountsService implements AccountsService
 
     @Inject
     private PendingPaymentValidator pendingPaymentValidator;
+
+    @Inject
+    private PersonalDetailsValidator personalDetailsValidator;
 
     @Override
     public Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException
@@ -50,5 +55,13 @@ public class DefaultAccountsService implements AccountsService
     {
         pendingPaymentValidator.validate(pendingPayment);
         return accountsRepository.createPendingPayment(account, pendingPayment);
+    }
+
+    @Override
+    public Account updatePersonalDetails(final Account account, final PersonalDetails personalDetails) throws InvalidArgumentException, NullArgumentException
+    {
+        personalDetailsValidator.validate(personalDetails);
+        account.setPersonalDetails(personalDetails);
+        return accountsRepository.update(account);
     }
 }
