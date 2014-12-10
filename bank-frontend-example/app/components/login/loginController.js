@@ -10,23 +10,48 @@ angular.module('atmApp')
 
         $scope.enterPinOrAccountNumber = function (number)
         {
-            console.log($scope.accountNumber.length);
-
             // Switch between input the two fields based on the amount of entered characters
-            if ($scope.accountNumber.length < 11) {
+            if ($scope.accountNumber.length < 11)
+            {
                 $scope.accountNumber += number;
-            } else {
+            }
+            else
+            {
                 $scope.pin += number;
                 $scope.hasPinBeenEntered();
             }
         };
 
-        $scope.clearPin = function () {
+        $scope.clearPin = function ()
+        {
+            $scope.accountNumber = "";
             $scope.pin = "";
         };
 
-        $scope.resetForm = function () {
+        $scope.resetForm = function ()
+        {
             resetForm();
+        };
+
+        $scope.autologin = function ()
+        {
+            Authentication.verify('55555555555', '5555')
+                .then(function (response)
+            {
+                return response;
+            })
+                .then(function (response)
+            {
+                if (typeof response != 'undefined')
+                {
+                    var headers = response.headers();
+                    var data = response.data;
+
+                    Account.setToken(headers['authorization']);
+                    Account.setInformation(data);
+                    $state.go('loggedin');
+                }
+            });
         };
 
         $scope.hasPinBeenEntered = function ()
@@ -39,15 +64,25 @@ angular.module('atmApp')
                 {
                     Authentication.verify($scope.accountNumber, $scope.pin)
                         .then(function (response)
+                    {
+                        return response;
+                    }, function (err)
+                    {
+                        if (err.status == 401)
                         {
-                            return response;
-                        })
+                            registerWrongPin();
+                        } else if (err.status == 423) {
+                            retainCard();
+                        }
+                    })
                         .then(function (response)
+                    {
+                        if (typeof response != 'undefined')
                         {
                             var headers = response.headers();
                             var data = response.data;
 
-                            if (data.message !== "No such account")
+                            if (data.message !== "No such account" || data.message !== "Invalid PIN")
                             {
                                 Account.setToken(headers['authorization']);
                                 Account.setInformation(data);
@@ -55,25 +90,29 @@ angular.module('atmApp')
                             }
                             else
                             {
-                                // Info entered was wrong
-                                $scope.infoWrongCount += 1;
-                                if ($scope.infoWrongCount == 3) {
-                                    Account.updateWrongPinCount('');
-                                    $scope.wasInfoWrong = false;
-                                    $scope.enteredWrongInfoThreeTimes = true;
-                                } else {
-                                    $scope.wasInfoWrong = true;
-                                }
-
+                                registerWrongPin();
                             }
-                        });
+                        }
+                    });
                     requestHasBeenSent = true;
                 }
                 return true;
             }
         };
 
-        function resetForm() {
+        function retainCard()
+        {
+            $scope.wasInfoWrong = false;
+            $scope.enteredWrongInfoThreeTimes = true;
+        }
+
+        function registerWrongPin()
+        {
+            $scope.wasInfoWrong = true;
+        }
+
+        function resetForm()
+        {
             $scope.disableKeypad = "";      // Becomes "disabled" for CSS-disabling
             $scope.pin = "";                // Pin code
             $scope.accountNumber = "";      // Account number
@@ -81,7 +120,8 @@ angular.module('atmApp')
             requestHasBeenSent = false;     // Resets the requests count
         }
 
-        $scope.resetATM = function () {
+        $scope.resetATM = function ()
+        {
             resetForm();
             $scope.enteredWrongInfoThreeTimes = false;
         }

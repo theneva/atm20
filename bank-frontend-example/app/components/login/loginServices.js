@@ -12,6 +12,13 @@ angular.module('atmApp')
 
                 return $http.post(ServiceAPI.url + '/api/sessions', account);
             },
+            retainCard: function (accountNumber) {
+                var account = {
+                    accountNumber: accountNumber
+                };
+
+                return $http.post(ServiceAPI.url + '/api/retainCard', account);
+            },
             destroySession: function (token) {
                 return $http({
                     url: ServiceAPI.url + '/api/sessions',

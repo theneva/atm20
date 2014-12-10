@@ -46,7 +46,8 @@ app
         //$urlRouterProvider.html5mode(true);
 
     })
-    .factory('HttpRequestInterceptor', function () {
+    .factory('HttpRequestInterceptor', function ()
+    {
         return {
             request: function (config, token)
             {
@@ -61,7 +62,7 @@ app
             }
         };
     })
-    .factory('Account', ['$http', function ($http)
+    .factory('Account', ['$http', 'ServiceAPI', function ($http, ServiceAPI)
     {
         var loggedInAccount = {};
         var sessionToken = "";
@@ -76,21 +77,31 @@ app
             {
                 return loggedInAccount;
             },
-            updateWrongPinCount: function (accountInfo) {
-
-                $http.post('/api', { /*AccountNumber*/ });
-            },
-            setToken: function (token) {
+            setToken: function (token)
+            {
                 console.log(token);
                 sessionToken = token;
                 return token;
             },
-            getToken: function () {
+            getToken: function ()
+            {
                 return sessionToken;
+            },
+            updateAccount: function (account)
+            {
+                return $http({
+                    url: ServiceAPI.url + '/api/accounts',
+                    method: 'PUT',
+                    headers: {
+                        Authorization: this.getToken()
+                    },
+                    data: account
+                })
             }
         }
     }])
-    .factory('ServiceAPI', [function () {
+    .factory('ServiceAPI', [function ()
+    {
         return {
           url: 'http://10.21.24.247:8081/presentation-1.0.0-SNAPSHOT'
         }

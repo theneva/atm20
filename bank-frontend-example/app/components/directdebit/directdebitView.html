@@ -19,8 +19,8 @@
         <td>{{payment.recipientNickname}}</td>
         <td>{{payment.recipientAccountNumber}}</td>
         <td>{{payment.dueDate}}</td>
-        <td>{{payment.totalAmount}}</td>
-        <td><button ng-click="cancelDirectDebitPayment(payment.id)" class="ui medium red button">Cancel</button> </td>
+        <td>{{payment.amount}}</td>
+        <td><button ng-click="cancelDirectDebitPayment(payment.id, $index)" class="ui medium red button">Cancel</button> </td>
     </tr>
     </tbody>
 </table>

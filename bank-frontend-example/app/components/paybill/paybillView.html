@@ -1,4 +1,4 @@
-<h3 class="ui right floated header">{{account.firstName}} {{account.lastName}} (#{{account.accountNumber}})</h3>
+<h3 class="ui right floated header">{{account.personalDetails.firstName}} {{account.personalDetails.lastName}} (#{{account.accountNumber}})</h3>
 
 <br/>
 <h4 class="ui horizontal header divider">
@@ -9,26 +9,47 @@
 <br/>
 <div class="ui form">
     <h4 class="ui dividing header">Payment Details</h4>
-
-    <div class="two fields">
+    <div class="three fields">
         <div class="field">
             <label>Pay to (account number)</label>
-            <input type="text" placeholder="Account number">
+            <input type="text" ng-model="bill.recipientAccountNumber" placeholder="Account number">
+        </div>
+        <div class="field">
+            <label>Pay to (nick name)</label>
+            <input ng-model="bill.recipientNickname" type="text">
         </div>
         <div class="field">
             <label>Due date</label>
-            <input type="date">
+            <input ng-model="bill.dueDate" type="text">
         </div>
     </div>
     <div class="two fields">
         <div class="field">
             <label>KID number</label>
-            <input type="text" placeholder="KID"/>
+            <input type="text" ng-model="bill.kid" placeholder="KID"/>
         </div>
         <div class="field">
             <label>Amount (NOK)</label>
-            <input type="text" placeholder=",-"/>
+            <input type="number" ng-model="bill.amount"/>
         </div>
     </div>
-    <button class="ui green button">Confirm payment</button>
+    <button ng-click="payBill()" class="ui green button">Confirm payment</button>
+
+    <div ng-show="showErrorMessage" class="ui negative message">
+        <i ng-click="closeErrorMessage()" class="close icon"></i>
+        <div class="header">
+            ERROR!!!!
+        </div>
+        <p>
+            {{errorMessage}}
+        </p>
+    </div>
+
+    <div ng-show="showMessage" class="ui message {{alert.alertColor}}">
+        <i ng-click="closeAlert()" class="close icon"></i>
+        <div class="header">
+            {{alert.alertHeading}}
+        </div>
+        <p>{{alert.alertBody}}</p>
+    </div>
 </div>
