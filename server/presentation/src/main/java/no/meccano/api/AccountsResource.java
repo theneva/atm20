@@ -36,9 +36,6 @@ public class AccountsResource
     @Produces("application/json")
     public Response updateAccount(final PersonalDetails personalDetails, @HeaderParam("Authorization") final String token)
     {
-        System.out.println("personal details: " + personalDetails);
-        System.out.println("token: " + token);
-
         try
         {
             final Session session = sessionsService.findByToken(token);

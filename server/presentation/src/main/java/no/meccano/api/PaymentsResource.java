@@ -3,6 +3,7 @@ package no.meccano.api;
 import no.meccano.business.AccountsService;
 import no.meccano.business.SessionsService;
 import no.meccano.domain.account.Account;
+import no.meccano.domain.account.payment.InsufficientBalanceException;
 import no.meccano.domain.account.payment.PendingPayment;
 import no.meccano.domain.account.payment.NoSuchPaymentException;
 import no.meccano.domain.authentication.NoSuchSessionException;
@@ -43,6 +44,10 @@ public class PaymentsResource
         catch (NoSuchSessionException e)
         {
             return Response.status(Response.Status.UNAUTHORIZED).entity(new ErrorResponse(e.getMessage())).build();
+        }
+        catch (InsufficientBalanceException e)
+        {
+            return Response.status(Response.Status.PAYMENT_REQUIRED).entity(new ErrorResponse(e.getMessage())).build();
         }
     }
 

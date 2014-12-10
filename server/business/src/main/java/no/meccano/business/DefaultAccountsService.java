@@ -5,6 +5,7 @@ import no.meccano.domain.account.Account;
 import no.meccano.domain.account.AccountNumberValidator;
 import no.meccano.domain.account.PersonalDetails;
 import no.meccano.domain.account.PersonalDetailsValidator;
+import no.meccano.domain.account.payment.InsufficientBalanceException;
 import no.meccano.domain.account.payment.NoSuchPaymentException;
 import no.meccano.domain.account.payment.PendingPayment;
 import no.meccano.domain.account.payment.PendingPaymentValidator;
@@ -57,9 +58,14 @@ public class DefaultAccountsService implements AccountsService
     }
 
     @Override
-    public PendingPayment createPendingPayment(final Account account, final PendingPayment pendingPayment) throws InvalidArgumentException, NullArgumentException
+    public PendingPayment createPendingPayment(final Account account, final PendingPayment pendingPayment) throws InvalidArgumentException, NullArgumentException, InsufficientBalanceException
     {
         pendingPaymentValidator.validate(pendingPayment);
+
+        if (account.getBalance() < pendingPayment.getAmount()) {
+            throw new InsufficientBalanceException(account.getBalance(), pendingPayment.getAmount());
+        }
+
         return accountsRepository.createPendingPayment(account, pendingPayment);
     }
 
