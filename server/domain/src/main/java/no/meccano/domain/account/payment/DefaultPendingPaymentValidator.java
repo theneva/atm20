@@ -26,11 +26,13 @@ public class DefaultPendingPaymentValidator implements PendingPaymentValidator
             throw new NullArgumentException("pendingPayment.id");
         }
 
-        if (pendingPayment.getKid() == null) {
+        if (pendingPayment.getKid() == null)
+        {
             throw new NullArgumentException("pendingPayment.kid");
         }
 
-        if (!pendingPayment.getKid().matches("[0-9]{2,17}")) {
+        if (!pendingPayment.getKid().matches("[0-9]{2,17}"))
+        {
             throw new InvalidArgumentException(pendingPayment.getKid(), "KID must be 2-17 digits");
         }
 
