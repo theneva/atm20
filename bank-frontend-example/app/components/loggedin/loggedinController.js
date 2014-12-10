@@ -7,10 +7,6 @@ angular.module('atmApp')
             $state.go('login');
         }
 
-
-        console.log($scope.account);
-
-
         $scope.toggleButtonVisibilityBool = false;
 
         $scope.toggleButtonVisibility = function ()

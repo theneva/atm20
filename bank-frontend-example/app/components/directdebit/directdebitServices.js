@@ -1,9 +1,15 @@
 angular.module('atmApp')
-    .factory('DirectDebitPayment', ['$http', function ($http) {
+    .factory('DirectDebitPayment', ['$http', 'Account', 'ServiceAPI', function ($http, Account, ServiceAPI) {
 
         return {
-            cancelPayment: function (debitPayment) {
-                $http.post('http://localhost:8080/api/cancelDebitPayment', debitPayment);
+            cancelPayment: function (id) {
+                $http({
+                    url: ServiceAPI.url + '/api/payments/' + id,
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: Account.getToken()
+                    }
+                });
             }
         }
     }]);

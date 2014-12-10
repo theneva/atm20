@@ -7,20 +7,20 @@
 <table class="ui table">
     <thead>
     <tr>
-        <th>Id</th>
-        <th>To</th>
+        <th>To (recipient name)</th>
+        <th>To (recipient number)</th>
         <th>Due Date (each month)</th>
         <th>Amount (NOK)</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="payment in account.debitPayments">
-        <td>{{payment._id}}</td>
-        <td>{{payment.receiver}}</td>
+    <tr ng-repeat="payment in account.pendingPayments">
+        <td>{{payment.recipientNickname}}</td>
+        <td>{{payment.recipientAccountNumber}}</td>
         <td>{{payment.dueDate}}</td>
-        <td>{{payment.pendingAmount}}</td>
-        <td><button ng-click="cancelDirectDebitPayment(payment)" class="ui medium red button">Cancel</button> </td>
+        <td>{{payment.totalAmount}}</td>
+        <td><button ng-click="cancelDirectDebitPayment(payment.id)" class="ui medium red button">Cancel</button> </td>
     </tr>
     </tbody>
 </table>

@@ -1,5 +1,5 @@
 angular.module('atmApp')
-    .factory('VerifyPin', ['$http', function ($http)
+    .factory('Authentication', ['$http', 'ServiceAPI', function ($http, ServiceAPI)
     {
         return {
             verify: function (accountNumber, pinNumber)
@@ -10,13 +10,11 @@ angular.module('atmApp')
                     pin: pinNumber
                 };
 
-                //return $http.get('http://10.21.24.124:8080/api/' + accountNumber + '/' + pinNumber);
-                return $http.post('http://10.21.24.126:8081/presentation-1.0.0-SNAPSHOT/api/sessions', account);
-                //return $http.post('http://localhost:8080/api/', account);
+                return $http.post(ServiceAPI.url + '/api/sessions', account);
             },
             destroySession: function (token) {
                 return $http({
-                    url: 'http://10.21.24.126:8081/presentation-1.0.0-SNAPSHOT/api/sessions',
+                    url: ServiceAPI.url + '/api/sessions',
                     method: 'DELETE',
                     headers: {
                         Authorization: token
