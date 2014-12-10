@@ -15,7 +15,8 @@ import java.util.List;
 @Stateless
 public class DefaultSessionsService implements SessionsService
 {
-    private final int MAX_FAILED_PIN_ATTEMPTS = 3;
+    private static final int MAX_FAILED_PIN_ATTEMPTS = 3;
+
     @Inject
     private SessionsRepository sessionsRepository;
 
