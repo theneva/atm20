@@ -1,5 +1,7 @@
 package no.meccano.domain.account;
 
+import no.meccano.domain.account.payment.PendingPayment;
+
 import java.util.ArrayList;
 import java.util.List;
 

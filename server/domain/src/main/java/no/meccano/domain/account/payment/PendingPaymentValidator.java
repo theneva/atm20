@@ -1,6 +1,5 @@
-package no.meccano.domain;
+package no.meccano.domain.account.payment;
 
-import no.meccano.domain.account.PendingPayment;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.NullArgumentException;
 

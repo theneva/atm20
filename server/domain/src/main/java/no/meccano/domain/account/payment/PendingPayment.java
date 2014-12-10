@@ -1,10 +1,11 @@
-package no.meccano.domain.account;
+package no.meccano.domain.account.payment;
 
 import java.util.UUID;
 
 public class PendingPayment
 {
     private String id = UUID.randomUUID().toString().toUpperCase();
+    private String kid;
     private String dueDate;
     private int amount;
     private String recipientNickname;
@@ -14,8 +15,9 @@ public class PendingPayment
     {
     }
 
-    public PendingPayment(final String dueDate, final int amount, final String recipientAccountNumber, final String recipientNickname)
+    public PendingPayment(final String kid, final String dueDate, final int amount, final String recipientAccountNumber, final String recipientNickname)
     {
+        this.kid = kid;
         this.dueDate = dueDate;
         this.amount = amount;
         this.recipientAccountNumber = recipientAccountNumber;
@@ -30,6 +32,16 @@ public class PendingPayment
     public void setId(final String id)
     {
         this.id = id;
+    }
+
+    public String getKid()
+    {
+        return kid;
+    }
+
+    public void setKid(final String kid)
+    {
+        this.kid = kid;
     }
 
     public String getDueDate()
@@ -104,7 +116,9 @@ public class PendingPayment
     public String toString()
     {
         return "PendingPayment{" +
-                "dueDate='" + dueDate + '\'' +
+                "id='" + id + '\'' +
+                ", kid='" + kid + '\'' +
+                ", dueDate='" + dueDate + '\'' +
                 ", amount=" + amount +
                 ", recipientNickname='" + recipientNickname + '\'' +
                 ", recipientAccountNumber='" + recipientAccountNumber + '\'' +

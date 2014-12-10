@@ -1,7 +1,6 @@
-package no.meccano.domain;
+package no.meccano.domain.account.payment;
 
 import no.meccano.domain.account.AccountNumberValidator;
-import no.meccano.domain.account.PendingPayment;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.NullArgumentException;
 
@@ -25,6 +24,14 @@ public class DefaultPendingPaymentValidator implements PendingPaymentValidator
         if (pendingPayment.getId() == null)
         {
             throw new NullArgumentException("pendingPayment.id");
+        }
+
+        if (pendingPayment.getKid() == null) {
+            throw new NullArgumentException("pendingPayment.kid");
+        }
+
+        if (!pendingPayment.getKid().matches("[0-9]{2,17}")) {
+            throw new InvalidArgumentException(pendingPayment.getKid(), "KID must be 2-17 digits");
         }
 
         if (pendingPayment.getAmount() <= 0)

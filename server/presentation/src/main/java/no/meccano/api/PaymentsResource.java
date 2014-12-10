@@ -3,7 +3,7 @@ package no.meccano.api;
 import no.meccano.business.AccountService;
 import no.meccano.business.SessionsService;
 import no.meccano.domain.account.Account;
-import no.meccano.domain.account.PendingPayment;
+import no.meccano.domain.account.payment.PendingPayment;
 import no.meccano.domain.account.payment.NoSuchPaymentException;
 import no.meccano.domain.authentication.NoSuchSessionException;
 import no.meccano.domain.authentication.Session;

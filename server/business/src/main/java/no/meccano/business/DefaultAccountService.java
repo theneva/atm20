@@ -1,10 +1,10 @@
 package no.meccano.business;
 
 import no.meccano.data.AccountRepository;
-import no.meccano.domain.PendingPaymentValidator;
+import no.meccano.domain.account.payment.PendingPaymentValidator;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.AccountNumberValidator;
-import no.meccano.domain.account.PendingPayment;
+import no.meccano.domain.account.payment.PendingPayment;
 import no.meccano.domain.account.payment.NoSuchPaymentException;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.NullArgumentException;
