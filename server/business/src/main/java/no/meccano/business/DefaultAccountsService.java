@@ -37,6 +37,12 @@ public class DefaultAccountsService implements AccountsService
     }
 
     @Override
+    public Account update(final Account account)
+    {
+        return accountsRepository.update(account);
+    }
+
+    @Override
     public PendingPayment cancelPaymentById(final Account account, final String paymentId) throws NoSuchPaymentException
     {
         final PendingPayment dummyPendingPayment = new PendingPayment();

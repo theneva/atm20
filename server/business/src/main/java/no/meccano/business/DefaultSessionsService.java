@@ -57,12 +57,19 @@ public class DefaultSessionsService implements SessionsService
                 matchedAccount.setFailedPinAttempts(matchedAccount.getFailedPinAttempts() + 1);
             }
 
+            accountsService.update(matchedAccount);
+
             if (matchedAccount.getFailedPinAttempts() > MAX_FAILED_PIN_ATTEMPTS)
             {
                 throw new TooManyFailedAttemptsException();
             }
 
             throw new InvalidCredentialsException("Invalid PIN");
+        }
+
+        if (matchedAccount.getFailedPinAttempts() > 0) {
+            matchedAccount.setFailedPinAttempts(0);
+            accountsService.update(matchedAccount);
         }
 
         return sessionsRepository.createSession(matchedAccount);

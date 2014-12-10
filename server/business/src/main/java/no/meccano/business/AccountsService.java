@@ -11,9 +11,12 @@ public interface AccountsService
 {
     Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException;
 
+    Account update(final Account account);
+
     PendingPayment cancelPaymentById(final Account account, final String paymentId) throws NoSuchPaymentException;
 
     PendingPayment createPendingPayment(final Account account, final PendingPayment pendingPayment) throws InvalidArgumentException, NullArgumentException;
 
     Account updatePersonalDetails(final Account account, final PersonalDetails personalDetails) throws InvalidArgumentException, NullArgumentException;
+
 }
