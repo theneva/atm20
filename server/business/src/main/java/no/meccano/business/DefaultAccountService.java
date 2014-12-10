@@ -1,6 +1,7 @@
 package no.meccano.business;
 
 import no.meccano.data.AccountRepository;
+import no.meccano.domain.PendingPaymentValidator;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.AccountNumberValidator;
 import no.meccano.domain.account.PendingPayment;
@@ -18,13 +19,16 @@ public class DefaultAccountService implements AccountService
     private AccountNumberValidator accountNumberValidator;
 
     @Inject
-    private AccountRepository accountRepository;
+    private AccountRepository accountsRepository;
+
+    @Inject
+    private PendingPaymentValidator pendingPaymentValidator;
 
     @Override
     public Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException
     {
         accountNumberValidator.validate(accountNumber);
-        return accountRepository.findByAccountNumber(accountNumber);
+        return accountsRepository.findByAccountNumber(accountNumber);
     }
 
     @Override
@@ -33,10 +37,18 @@ public class DefaultAccountService implements AccountService
         final PendingPayment dummyPendingPayment = new PendingPayment();
         dummyPendingPayment.setId(paymentId);
 
-        if (!account.getPendingPayments().contains(dummyPendingPayment)) {
+        if (!account.getPendingPayments().contains(dummyPendingPayment))
+        {
             throw new NoSuchPaymentException(paymentId);
         }
 
-        return accountRepository.cancelPayment(account, dummyPendingPayment);
+        return accountsRepository.cancelPayment(account, dummyPendingPayment);
+    }
+
+    @Override
+    public PendingPayment createPendingPayment(final Account account, final PendingPayment pendingPayment) throws InvalidArgumentException, NullArgumentException
+    {
+        pendingPaymentValidator.validate(pendingPayment);
+        return accountsRepository.createPendingPayment(account, pendingPayment);
     }
 }

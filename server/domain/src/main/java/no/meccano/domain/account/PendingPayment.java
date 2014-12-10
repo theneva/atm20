@@ -6,7 +6,7 @@ public class PendingPayment
 {
     private String id = UUID.randomUUID().toString().toUpperCase();
     private String dueDate;
-    private int totalAmount;
+    private int amount;
     private String recipientNickname;
     private String recipientAccountNumber;
 
@@ -14,10 +14,10 @@ public class PendingPayment
     {
     }
 
-    public PendingPayment(final String dueDate, final int totalAmount, final String recipientAccountNumber, final String recipientNickname)
+    public PendingPayment(final String dueDate, final int amount, final String recipientAccountNumber, final String recipientNickname)
     {
         this.dueDate = dueDate;
-        this.totalAmount = totalAmount;
+        this.amount = amount;
         this.recipientAccountNumber = recipientAccountNumber;
         this.recipientNickname = recipientNickname;
     }
@@ -42,14 +42,14 @@ public class PendingPayment
         this.dueDate = dueDate;
     }
 
-    public int getTotalAmount()
+    public int getAmount()
     {
-        return totalAmount;
+        return amount;
     }
 
-    public void setTotalAmount(final int totalAmount)
+    public void setAmount(final int amount)
     {
-        this.totalAmount = totalAmount;
+        this.amount = amount;
     }
 
     public String getRecipientNickname()
@@ -105,7 +105,7 @@ public class PendingPayment
     {
         return "PendingPayment{" +
                 "dueDate='" + dueDate + '\'' +
-                ", totalAmount=" + totalAmount +
+                ", amount=" + amount +
                 ", recipientNickname='" + recipientNickname + '\'' +
                 ", recipientAccountNumber='" + recipientAccountNumber + '\'' +
                 '}';

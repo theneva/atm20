@@ -11,4 +11,6 @@ public interface AccountService
     Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException;
 
     PendingPayment cancelPaymentById(final Account account, final String paymentId) throws NoSuchPaymentException;
+
+    PendingPayment createPendingPayment(final Account account, final PendingPayment pendingPayment) throws InvalidArgumentException, NullArgumentException;
 }

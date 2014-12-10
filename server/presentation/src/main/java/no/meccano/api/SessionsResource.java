@@ -26,7 +26,8 @@ public class SessionsResource
 
     @GET
     @Produces("application/json")
-    public Response findAll() {
+    public Response findAll()
+    {
         return Response.ok(sessionsService.findAll()).build();
     }
 
