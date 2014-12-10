@@ -20,7 +20,7 @@ public class DefaultAccountNumberValidator implements AccountNumberValidator
 
         if (!accountNumber.matches("[0-9]{" + DIGITS_IN_ACCOUNT_NUMBER + "}"))
         {
-            throw new InvalidArgumentException(accountNumber, "Account number must be consist of exactly " + DIGITS_IN_ACCOUNT_NUMBER + " digits");
+            throw new InvalidArgumentException("Account number must be consist of exactly " + DIGITS_IN_ACCOUNT_NUMBER + " digits");
         }
     }
 }

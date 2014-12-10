@@ -21,7 +21,7 @@ public class DefaultTokenValidator implements TokenValidator
 
         if (token.length() != CHARACTERS_IN_TOKEN)
         {
-            throw new InvalidArgumentException(token, "Token should be exactly " + CHARACTERS_IN_TOKEN + " characters long");
+            throw new InvalidArgumentException("Token should be exactly " + CHARACTERS_IN_TOKEN + " characters long");
         }
     }
 }

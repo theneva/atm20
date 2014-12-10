@@ -33,12 +33,12 @@ public class DefaultPendingPaymentValidator implements PendingPaymentValidator
 
         if (!pendingPayment.getKid().matches("[0-9]{2,17}"))
         {
-            throw new InvalidArgumentException(pendingPayment.getKid(), "KID must be 2-17 digits");
+            throw new InvalidArgumentException("KID must be 2-17 digits");
         }
 
         if (pendingPayment.getAmount() <= 0)
         {
-            throw new InvalidArgumentException(pendingPayment.getAmount(), "Amount must be greater than 0");
+            throw new InvalidArgumentException("Amount must be greater than 0");
         }
 
         if (pendingPayment.getDueDate() == null)
@@ -48,7 +48,7 @@ public class DefaultPendingPaymentValidator implements PendingPaymentValidator
 
         if (!pendingPayment.getDueDate().matches("[0-9]{4}-[0-9]{2}-[0-9]{2}"))
         {
-            throw new InvalidArgumentException(pendingPayment.getDueDate(), "Due date must be on the format XXXX-XX-XX where each X is a digit.");
+            throw new InvalidArgumentException("Due date must be on the format XXXX-XX-XX where each X is a digit.");
         }
 
         accountNumberValidator.validate(pendingPayment.getRecipientAccountNumber());
@@ -60,7 +60,7 @@ public class DefaultPendingPaymentValidator implements PendingPaymentValidator
 
         if (pendingPayment.getRecipientNickname().trim().length() == 0)
         {
-            throw new InvalidArgumentException(pendingPayment.getRecipientNickname(), "Recipient nickname must be at least 1 character long, and not only whitespace.");
+            throw new InvalidArgumentException("Recipient nickname must be at least 1 character long, and not only whitespace.");
         }
     }
 }

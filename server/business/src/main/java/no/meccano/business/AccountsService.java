@@ -6,7 +6,7 @@ import no.meccano.domain.account.payment.NoSuchPaymentException;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.NullArgumentException;
 
-public interface AccountService
+public interface AccountsService
 {
     Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException;
 

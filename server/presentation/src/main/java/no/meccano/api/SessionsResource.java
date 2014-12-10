@@ -1,10 +1,11 @@
 package no.meccano.api;
 
-import no.meccano.business.AccountService;
+import no.meccano.business.AccountsService;
 import no.meccano.business.SessionsService;
 import no.meccano.domain.authentication.AuthenticationAttempt;
 import no.meccano.domain.authentication.NoSuchSessionException;
 import no.meccano.domain.authentication.Session;
+import no.meccano.domain.authentication.TooManyFailedAttemptsException;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.InvalidCredentialsException;
 import no.meccano.domain.common.NullArgumentException;
@@ -19,7 +20,7 @@ public class SessionsResource
     public static final String PATH = "/sessions";
 
     @Inject
-    private AccountService accountService;
+    private AccountsService accountsService;
 
     @Inject
     private SessionsService sessionsService;
@@ -39,7 +40,7 @@ public class SessionsResource
         try
         {
             final Session session = sessionsService.createSession(attempt);
-            return Response.status(201)
+            return Response.status(Response.Status.CREATED)
                     .entity(session.getAccount())
                     .header("Authorization", session.getToken())
                     .build();
@@ -53,6 +54,12 @@ public class SessionsResource
         catch (InvalidCredentialsException e)
         {
             return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new ErrorResponse(e.getMessage()))
+                    .build();
+        }
+        catch (TooManyFailedAttemptsException e)
+        {
+            return Response.status(423) // Locked
                     .entity(new ErrorResponse(e.getMessage()))
                     .build();
         }

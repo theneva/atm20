@@ -15,6 +15,7 @@ import java.util.List;
 @Stateless
 public class DefaultSessionsService implements SessionsService
 {
+    private final int MAX_FAILED_PIN_ATTEMPTS = 3;
     @Inject
     private SessionsRepository sessionsRepository;
 
@@ -25,7 +26,7 @@ public class DefaultSessionsService implements SessionsService
     private AuthenticationAttemptValidator authenticationAttemptValidator;
 
     @Inject
-    private AccountService accountService;
+    private AccountsService accountsService;
 
     @Inject
     private TokenValidator tokenValidator;
@@ -37,11 +38,11 @@ public class DefaultSessionsService implements SessionsService
     }
 
     @Override
-    public Session createSession(final AuthenticationAttempt authenticationAttempt) throws InvalidArgumentException, NullArgumentException, InvalidCredentialsException
+    public Session createSession(final AuthenticationAttempt authenticationAttempt) throws InvalidArgumentException, NullArgumentException, InvalidCredentialsException, TooManyFailedAttemptsException
     {
         authenticationAttemptValidator.validate(authenticationAttempt);
 
-        final Account matchedAccount = accountService.findByAccountNumber(authenticationAttempt.getAccountNumber());
+        final Account matchedAccount = accountsService.findByAccountNumber(authenticationAttempt.getAccountNumber());
 
         if (matchedAccount == null)
         {
@@ -50,6 +51,16 @@ public class DefaultSessionsService implements SessionsService
 
         if (!authenticationAttempt.getPin().equals(matchedAccount.getPin()))
         {
+            if (matchedAccount.getFailedPinAttempts() <= MAX_FAILED_PIN_ATTEMPTS)
+            {
+                matchedAccount.setFailedPinAttempts(matchedAccount.getFailedPinAttempts() + 1);
+            }
+
+            if (matchedAccount.getFailedPinAttempts() > MAX_FAILED_PIN_ATTEMPTS)
+            {
+                throw new TooManyFailedAttemptsException();
+            }
+
             throw new InvalidCredentialsException("Invalid PIN");
         }
 

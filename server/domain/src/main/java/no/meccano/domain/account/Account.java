@@ -18,6 +18,7 @@ public class Account
     private String accountNumber;
     private int balance;
     private String pin;
+    private int failedPinAttempts = 0;
     private List<PendingPayment> pendingPayments = new ArrayList<>();
 
     public Account(final String firstName, final String middleName, final String lastName, final String address, final String postalCode, final String region, final String state, final String country, final String accountNumber, final int balance, final String pin, final List<PendingPayment> pendingPayments)
@@ -146,6 +147,16 @@ public class Account
         this.pin = pin;
     }
 
+    public int getFailedPinAttempts()
+    {
+        return failedPinAttempts;
+    }
+
+    public void setFailedPinAttempts(final int failedPinAttempts)
+    {
+        this.failedPinAttempts = failedPinAttempts;
+    }
+
     public List<PendingPayment> getPendingPayments()
     {
         return pendingPayments;
@@ -160,18 +171,19 @@ public class Account
     public String toString()
     {
         return "Account{" +
-                "pendingPayments=" + pendingPayments +
-                ", pin='" + pin + '\'' +
-                ", balance=" + balance +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", country='" + country + '\'' +
-                ", state='" + state + '\'' +
-                ", region='" + region + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", address='" + address + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", region='" + region + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", balance=" + balance +
+                ", pin='" + pin + '\'' +
+                ", failedPinAttempts=" + failedPinAttempts +
+                ", pendingPayments=" + pendingPayments +
                 '}';
     }
 }

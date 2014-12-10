@@ -1,6 +1,6 @@
 package no.meccano.api;
 
-import no.meccano.business.AccountService;
+import no.meccano.business.AccountsService;
 import no.meccano.business.SessionsService;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.payment.PendingPayment;
@@ -20,7 +20,7 @@ public class PaymentsResource
     public static final String PATH = "/payments";
 
     @Inject
-    private AccountService accountsService;
+    private AccountsService accountsService;
 
     @Inject
     private SessionsService sessionsService;

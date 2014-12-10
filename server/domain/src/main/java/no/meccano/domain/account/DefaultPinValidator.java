@@ -14,7 +14,7 @@ public class DefaultPinValidator implements PinValidator
     {
         if (!pin.matches("[0-9]{" + DIGITS_IN_PIN + "}"))
         {
-            throw new InvalidArgumentException(pin, "The PIN code must be exactly " + DIGITS_IN_PIN + " digits");
+            throw new InvalidArgumentException("The PIN code must be exactly " + DIGITS_IN_PIN + " digits");
         }
     }
 }
