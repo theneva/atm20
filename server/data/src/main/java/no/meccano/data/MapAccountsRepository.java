@@ -11,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ApplicationScoped
-public class MapAccountRepository implements AccountRepository
+public class MapAccountsRepository implements AccountsRepository
 {
     private final Map<String, Account> accounts = new HashMap<>();
 
-    public MapAccountRepository()
+    public MapAccountsRepository()
     {
         final String martinAccountNumber = "12312312312";
         final String andreasAccountNumber = "55555555555";

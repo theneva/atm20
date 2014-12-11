@@ -3,7 +3,7 @@ package no.meccano.data;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.payment.PendingPayment;
 
-public interface AccountRepository
+public interface AccountsRepository
 {
     Account findByAccountNumber(final String accountNumber);
 

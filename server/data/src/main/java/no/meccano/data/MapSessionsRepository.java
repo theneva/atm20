@@ -12,7 +12,7 @@ import java.util.*;
 public class MapSessionsRepository implements SessionsRepository
 {
     @Inject
-    private AccountRepository accountRepository;
+    private AccountsRepository accountsRepository;
 
     private final Map<String, Session> sessions = new HashMap<>();
 
@@ -36,7 +36,7 @@ public class MapSessionsRepository implements SessionsRepository
     {
         final String andreasAccountNumber = "55555555555";
         final String andreasToken = "AD5C7873-60E7-4A47-BA40-380C900DFAF5";
-        sessions.put(andreasToken, new Session(andreasToken, accountRepository.findByAccountNumber(andreasAccountNumber)));
+        sessions.put(andreasToken, new Session(andreasToken, accountsRepository.findByAccountNumber(andreasAccountNumber)));
     }
 
     @Override

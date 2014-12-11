@@ -1,6 +1,5 @@
 package no.meccano.business;
 
-import no.meccano.data.AccountRepository;
 import no.meccano.domain.account.Account;
 import no.meccano.domain.account.AccountNumberValidator;
 import no.meccano.domain.account.PersonalDetails;
@@ -11,6 +10,7 @@ import no.meccano.domain.account.payment.PendingPayment;
 import no.meccano.domain.account.payment.PendingPaymentValidator;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.NullArgumentException;
+import no.meccano.integration.AccountsRouter;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ public class DefaultAccountsService implements AccountsService
     private AccountNumberValidator accountNumberValidator;
 
     @Inject
-    private AccountRepository accountsRepository;
+    private AccountsRouter accountsRouter;
 
     @Inject
     private PendingPaymentValidator pendingPaymentValidator;
@@ -34,13 +34,13 @@ public class DefaultAccountsService implements AccountsService
     public Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException
     {
         accountNumberValidator.validate(accountNumber);
-        return accountsRepository.findByAccountNumber(accountNumber);
+        return accountsRouter.findByAccountNumber(accountNumber);
     }
 
     @Override
     public Account update(final Account account)
     {
-        return accountsRepository.update(account);
+        return accountsRouter.update(account);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DefaultAccountsService implements AccountsService
             throw new NoSuchPaymentException(paymentId);
         }
 
-        return accountsRepository.cancelPayment(account, dummyPendingPayment);
+        return accountsRouter.cancelPayment(account, dummyPendingPayment);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class DefaultAccountsService implements AccountsService
             throw new InsufficientBalanceException(account.getBalance(), pendingPayment.getAmount());
         }
 
-        return accountsRepository.createPendingPayment(account, pendingPayment);
+        return accountsRouter.createPendingPayment(account, pendingPayment);
     }
 
     @Override
@@ -74,6 +74,6 @@ public class DefaultAccountsService implements AccountsService
     {
         personalDetailsValidator.validate(personalDetails);
         account.setPersonalDetails(personalDetails);
-        return accountsRepository.update(account);
+        return accountsRouter.update(account);
     }
 }

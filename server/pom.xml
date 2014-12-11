@@ -9,6 +9,7 @@
         <module>presentation</module>
         <module>business</module>
         <module>domain</module>
+        <module>integration</module>
         <module>data</module>
     </modules>
 
