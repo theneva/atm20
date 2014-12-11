@@ -68,11 +68,16 @@ angular.module('atmApp')
                         return response;
                     }, function (err)
                     {
+                        console.log(err);
                         if (err.status == 401)
                         {
                             registerWrongPin();
-                        } else if (err.status == 423) {
+                        } else if (err.status == 423)
+                        {
                             retainCard();
+                        } else if (err.status == 0)
+                        {
+                            alert('The server is currently offline.');
                         }
                     })
                         .then(function (response)
@@ -100,6 +105,12 @@ angular.module('atmApp')
             }
         };
 
+        $scope.resetATM = function ()
+        {
+            resetForm();
+            $scope.enteredWrongInfoThreeTimes = false;
+        };
+
         function retainCard()
         {
             $scope.wasInfoWrong = false;
@@ -118,11 +129,5 @@ angular.module('atmApp')
             $scope.accountNumber = "";      // Account number
             $scope.wasInfoWrong = false;    // If the entered information was wrong
             requestHasBeenSent = false;     // Resets the requests count
-        }
-
-        $scope.resetATM = function ()
-        {
-            resetForm();
-            $scope.enteredWrongInfoThreeTimes = false;
         }
     }]);

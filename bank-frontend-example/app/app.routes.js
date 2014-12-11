@@ -103,7 +103,7 @@ app
     .factory('ServiceAPI', [function ()
     {
         return {
-          url: 'http://10.21.24.247:8081/presentation-1.0.0-SNAPSHOT'
+          url: 'http://theneva.com/atm20'
         }
     }])
     .run(function ($rootScope, $location, $http, $timeout)

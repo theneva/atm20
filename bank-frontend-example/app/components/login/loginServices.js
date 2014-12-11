@@ -4,7 +4,6 @@ angular.module('atmApp')
         return {
             verify: function (accountNumber, pinNumber)
             {
-
                 var account = {
                     accountNumber: accountNumber,
                     pin: pinNumber

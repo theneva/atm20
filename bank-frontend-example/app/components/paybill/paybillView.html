@@ -33,7 +33,8 @@
             <input type="number" ng-model="bill.amount"/>
         </div>
     </div>
-    <button ng-click="payBill()" class="ui green button">Confirm payment</button>
+    <button ng-click="payBill()" class="ui huge green button">Confirm payment</button>
+    <button ng-click="clearFields()" class="ui huge red button">Clear fields</button>
 
     <div ng-show="showErrorMessage" class="ui negative message">
         <i ng-click="closeErrorMessage()" class="close icon"></i>

@@ -45,6 +45,16 @@ angular.module('atmApp')
             $scope.showMessage = false;
         };
 
+        $scope.clearFields = function () {
+            $scope.bill = {
+                amount: 0,
+                dueDate: '',
+                recipientAccountNumber: '',
+                recipientNickname: '',
+                kid: ''
+            };
+        };
+
         function showMessage (color, heading, body) {
             $scope.showMessage = true;
             $scope.alert.alertColor = color;
