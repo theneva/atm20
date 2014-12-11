@@ -103,7 +103,7 @@ app
     .factory('ServiceAPI', [function ()
     {
         return {
-          url: 'http://localhost:8080/atm20'
+          url: 'http://theneva.com/atm20'
         }
     }])
     .run(function ($rootScope, $location, $http, $timeout)
