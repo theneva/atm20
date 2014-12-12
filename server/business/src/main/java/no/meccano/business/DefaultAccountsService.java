@@ -24,7 +24,11 @@ public class DefaultAccountsService implements AccountsService
     private PersonalDetailsValidator personalDetailsValidator;
 
     @Inject
-    public DefaultAccountsService(final AccountNumberValidator accountNumberValidator, final AccountsRouter accountsRouter, final PendingPaymentValidator pendingPaymentValidator, final PersonalDetailsValidator personalDetailsValidator)
+    public DefaultAccountsService(
+            final AccountNumberValidator accountNumberValidator,
+            final AccountsRouter accountsRouter,
+            final PendingPaymentValidator pendingPaymentValidator,
+            final PersonalDetailsValidator personalDetailsValidator)
     {
         this.accountNumberValidator = accountNumberValidator;
         this.accountsRouter = accountsRouter;
@@ -33,7 +37,8 @@ public class DefaultAccountsService implements AccountsService
     }
 
     @Override
-    public Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException
+    public Account findByAccountNumber(final String accountNumber)
+            throws InvalidArgumentException, NullArgumentException
     {
         accountNumberValidator.validate(accountNumber);
         return accountsRouter.findByAccountNumber(accountNumber);
