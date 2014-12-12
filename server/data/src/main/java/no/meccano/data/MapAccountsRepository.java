@@ -26,7 +26,7 @@ public class MapAccountsRepository implements AccountsRepository
                 new PendingPayment("56453345", "2014-12-14", 100, "27834793902", "McDonald's")
         ))));
 
-        accounts.put(andreasAccountNumber, new Account(new PersonalDetails("Andreas", "Biørn-Hansen", "Bråtenlia 9D", "1929", "Auli", "Akershus"), andreasAccountNumber, 439, "5555", new ArrayList<>(Arrays.asList(
+        accounts.put(andreasAccountNumber, new Account(new PersonalDetails("Andreas", "Biørn-Hansen", "Epleveien 12B", "0580", "Oslo", "Oslo"), andreasAccountNumber, 439, "5555", new ArrayList<>(Arrays.asList(
                 new PendingPayment("23423423", "2014-12-10", 437, "12312312312", "Øl til Martin"),
                 new PendingPayment("6756763454", "2014-12-14", 100, "27834793902", "Chess"),
                 new PendingPayment("198293", "2014-12-14", 100, "27834793902", "Husleie"),

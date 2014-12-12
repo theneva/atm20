@@ -21,7 +21,9 @@ public class RestDemoPendingPaymentRouter implements PendingPaymentRouter
         final WebTarget target = client.target("http://localhost:4321");
         final Response response = target.request(MediaType.APPLICATION_JSON)
                 .header("Content-Type", "application/json")
-                .post(Entity.entity("{\"id\": \"3E0E6762-C942-48FD-9E97-7184DABEB29D\"}", MediaType.APPLICATION_JSON));
+                .post(Entity.entity(
+                        "{\"id\": \"3E0E6762-C942-48FD-9E97-7184DABEB29D\"}",
+                        MediaType.APPLICATION_JSON));
 
         System.out.println(response.getEntity());
 
