@@ -10,8 +10,13 @@ import javax.inject.Inject;
 @Stateless
 public class DefaultAccountsRouter implements AccountsRouter
 {
-    @Inject
     private AccountsRepository accountsRepository;
+
+    @Inject
+    public DefaultAccountsRouter(final AccountsRepository accountsRepository)
+    {
+        this.accountsRepository = accountsRepository;
+    }
 
     @Override
     public Account findByAccountNumber(final String accountNumber)
@@ -22,7 +27,7 @@ public class DefaultAccountsRouter implements AccountsRouter
     @Override
     public PendingPayment cancelPayment(final Account account, final PendingPayment pendingPayment)
     {
-        return accountsRepository.cancelPayment(account, pendingPayment);
+        return accountsRepository.cancelPendingPayment(account, pendingPayment);
     }
 
     @Override

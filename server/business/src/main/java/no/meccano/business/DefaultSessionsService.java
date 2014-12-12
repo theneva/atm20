@@ -1,7 +1,6 @@
 package no.meccano.business;
 
 import no.meccano.domain.account.Account;
-import no.meccano.domain.account.AccountNumberValidator;
 import no.meccano.domain.authentication.*;
 import no.meccano.domain.common.InvalidArgumentException;
 import no.meccano.domain.common.InvalidCredentialsException;
@@ -17,20 +16,19 @@ public class DefaultSessionsService implements SessionsService
 {
     private static final int MAX_FAILED_PIN_ATTEMPTS = 3;
 
-    @Inject
     private SessionsRouter sessionsRouter;
-
-    @Inject
-    private AccountNumberValidator accountNumberValidator;
-
-    @Inject
     private AuthenticationAttemptValidator authenticationAttemptValidator;
-
-    @Inject
     private AccountsService accountsService;
+    private TokenValidator tokenValidator;
 
     @Inject
-    private TokenValidator tokenValidator;
+    public DefaultSessionsService(final SessionsRouter sessionsRouter, final AuthenticationAttemptValidator authenticationAttemptValidator, final AccountsService accountsService, final TokenValidator tokenValidator)
+    {
+        this.sessionsRouter = sessionsRouter;
+        this.authenticationAttemptValidator = authenticationAttemptValidator;
+        this.accountsService = accountsService;
+        this.tokenValidator = tokenValidator;
+    }
 
     @Override
     public List<Session> findAll()

@@ -12,8 +12,13 @@ import java.util.List;
 @Stateless
 public class DefaultSessionsRouter implements SessionsRouter
 {
-    @Inject
     private SessionsRepository sessionsRepository;
+
+    @Inject
+    public DefaultSessionsRouter(final SessionsRepository sessionsRepository)
+    {
+        this.sessionsRepository = sessionsRepository;
+    }
 
     @Override
     public Session findByToken(final String accountNumber) throws NoSuchSessionException

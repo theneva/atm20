@@ -9,8 +9,13 @@ import javax.inject.Inject;
 @Stateless
 public class RestDemoPendingPaymentService implements PendingPaymentService
 {
-    @Inject
     private PendingPaymentRouter pendingPaymentRouter;
+
+    @Inject
+    public RestDemoPendingPaymentService(final PendingPaymentRouter pendingPaymentRouter)
+    {
+        this.pendingPaymentRouter = pendingPaymentRouter;
+    }
 
     @Override
     public PendingPayment getPendingPaymentById(final String id)

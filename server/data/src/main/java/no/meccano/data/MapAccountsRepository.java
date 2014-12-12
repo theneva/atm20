@@ -44,7 +44,7 @@ public class MapAccountsRepository implements AccountsRepository
     }
 
     @Override
-    public PendingPayment cancelPayment(final Account account, final PendingPayment pendingPayment)
+    public PendingPayment cancelPendingPayment(final Account account, final PendingPayment pendingPayment)
     {
         return account.getPendingPayments().remove(account.getPendingPayments().indexOf(pendingPayment));
     }

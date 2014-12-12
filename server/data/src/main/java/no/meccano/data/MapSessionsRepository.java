@@ -11,8 +11,17 @@ import java.util.*;
 @ApplicationScoped
 public class MapSessionsRepository implements SessionsRepository
 {
-    @Inject
     private AccountsRepository accountsRepository;
+
+    public MapSessionsRepository()
+    {
+    }
+
+    @Inject
+    public MapSessionsRepository(final AccountsRepository accountsRepository)
+    {
+        this.accountsRepository = accountsRepository;
+    }
 
     private final Map<String, Session> sessions = new HashMap<>();
 

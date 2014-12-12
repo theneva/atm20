@@ -18,17 +18,19 @@ import javax.inject.Inject;
 @Stateless
 public class DefaultAccountsService implements AccountsService
 {
-    @Inject
     private AccountNumberValidator accountNumberValidator;
-
-    @Inject
     private AccountsRouter accountsRouter;
-
-    @Inject
     private PendingPaymentValidator pendingPaymentValidator;
+    private PersonalDetailsValidator personalDetailsValidator;
 
     @Inject
-    private PersonalDetailsValidator personalDetailsValidator;
+    public DefaultAccountsService(final AccountNumberValidator accountNumberValidator, final AccountsRouter accountsRouter, final PendingPaymentValidator pendingPaymentValidator, final PersonalDetailsValidator personalDetailsValidator)
+    {
+        this.accountNumberValidator = accountNumberValidator;
+        this.accountsRouter = accountsRouter;
+        this.pendingPaymentValidator = pendingPaymentValidator;
+        this.personalDetailsValidator = personalDetailsValidator;
+    }
 
     @Override
     public Account findByAccountNumber(final String accountNumber) throws InvalidArgumentException, NullArgumentException
